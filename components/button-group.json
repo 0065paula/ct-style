@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "name": "button-group",
+  "type": "component",
+  "files": [
+    {
+      "path": "templates/component/button-group.tsx",
+      "type": "component",
+      "target": "components/ui/button-group.tsx"
+    }
+  ],
+  "dependencies": [],
+  "registryDependencies": [
+    "button",
+    "utils"
+  ]
+}
+

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "name": "combobox",
+  "type": "component",
+  "files": [
+    {
+      "path": "templates/component/combobox.tsx",
+      "type": "component",
+      "target": "components/ui/combobox.tsx"
+    }
+  ],
+  "dependencies": [],
+  "registryDependencies": [
+    "button",
+    "command",
+    "popover",
+    "utils"
+  ]
+}
+

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "name": "select",
+  "type": "component",
+  "files": [
+    {
+      "path": "templates/component/select.tsx",
+      "type": "component",
+      "target": "components/ui/select.tsx"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-select"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}
+

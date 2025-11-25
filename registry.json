@@ -45,6 +45,41 @@
       "path": "components/tabs.json"
     },
     {
+      "name": "button-group",
+      "type": "component",
+      "path": "components/button-group.json"
+    },
+    {
+      "name": "select",
+      "type": "component",
+      "path": "components/select.json"
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "component",
+      "path": "components/dropdown-menu.json"
+    },
+    {
+      "name": "popover",
+      "type": "component",
+      "path": "components/popover.json"
+    },
+    {
+      "name": "command",
+      "type": "component",
+      "path": "components/command.json"
+    },
+    {
+      "name": "combobox",
+      "type": "component",
+      "path": "components/combobox.json"
+    },
+    {
+      "name": "context-menu",
+      "type": "component",
+      "path": "components/context-menu.json"
+    },
+    {
       "name": "utils",
       "type": "lib",
       "path": "components/utils.json"

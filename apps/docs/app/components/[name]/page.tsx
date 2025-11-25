@@ -11,6 +11,24 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Switch } from '@/components/ui/switch'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import { Combobox } from '@/components/ui/combobox'
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuLabel,
+  ContextMenuSeparator,
+  ContextMenuTrigger,
+} from '@/components/ui/context-menu'
 
 const TableOfContents = dynamic(() => import('../../../components/layout/toc').then(mod => ({ default: mod.TableOfContents })), {
   ssr: false,
@@ -142,6 +160,61 @@ export default function ComponentPage({ params }: { params: { name: string } }) 
           { prop: 'TabsContent.className', type: 'string', default: 'undefined', description: '额外的 CSS 类名' },
           { prop: '...props', type: 'TabsPrimitive props', default: '-', description: '继承所有 Radix UI Tabs 的属性' },
         ]
+      case 'select':
+        return [
+          { prop: 'Select', type: 'React.Component', default: '-', description: '选择器根组件' },
+          { prop: 'Select.value', type: 'string', default: 'undefined', description: '当前选中的值（受控）' },
+          { prop: 'Select.defaultValue', type: 'string', default: 'undefined', description: '默认选中的值（非受控）' },
+          { prop: 'Select.onValueChange', type: '(value: string) => void', default: 'undefined', description: '值变化时的回调函数' },
+          { prop: 'SelectTrigger', type: 'React.Component', default: '-', description: '选择器触发器' },
+          { prop: 'SelectTrigger.className', type: 'string', default: 'undefined', description: '额外的 CSS 类名' },
+          { prop: 'SelectValue', type: 'React.Component', default: '-', description: '显示选中值的组件' },
+          { prop: 'SelectValue.placeholder', type: 'string', default: 'undefined', description: '占位符文本' },
+          { prop: 'SelectContent', type: 'React.Component', default: '-', description: '下拉菜单内容容器' },
+          { prop: 'SelectContent.position', type: '"popper" | "item-aligned"', default: '"popper"', description: '定位方式' },
+          { prop: 'SelectItem', type: 'React.Component', default: '-', description: '选择项' },
+          { prop: 'SelectItem.value', type: 'string', default: '-', description: '选项的值（必需）' },
+          { prop: 'SelectItem.disabled', type: 'boolean', default: 'false', description: '是否禁用' },
+          { prop: '...props', type: 'SelectPrimitive props', default: '-', description: '继承所有 Radix UI Select 的属性' },
+        ]
+      case 'dropdown-menu':
+        return [
+          { prop: 'DropdownMenu', type: 'React.Component', default: '-', description: '下拉菜单根组件' },
+          { prop: 'DropdownMenuTrigger', type: 'React.Component', default: '-', description: '下拉菜单触发器' },
+          { prop: 'DropdownMenuTrigger.asChild', type: 'boolean', default: 'false', description: '是否作为子元素渲染' },
+          { prop: 'DropdownMenuContent', type: 'React.Component', default: '-', description: '下拉菜单内容容器' },
+          { prop: 'DropdownMenuContent.sideOffset', type: 'number', default: '4', description: '与触发器的偏移距离' },
+          { prop: 'DropdownMenuItem', type: 'React.Component', default: '-', description: '菜单项' },
+          { prop: 'DropdownMenuItem.inset', type: 'boolean', default: 'false', description: '是否增加左侧内边距' },
+          { prop: 'DropdownMenuItem.disabled', type: 'boolean', default: 'false', description: '是否禁用' },
+          { prop: 'DropdownMenuLabel', type: 'React.Component', default: '-', description: '菜单标签' },
+          { prop: 'DropdownMenuSeparator', type: 'React.Component', default: '-', description: '菜单分隔符' },
+          { prop: '...props', type: 'DropdownMenuPrimitive props', default: '-', description: '继承所有 Radix UI DropdownMenu 的属性' },
+        ]
+      case 'combobox':
+        return [
+          { prop: 'options', type: 'ComboboxOption[]', default: '-', description: '选项数组（必需）' },
+          { prop: 'value', type: 'string', default: 'undefined', description: '当前选中的值（受控）' },
+          { prop: 'onValueChange', type: '(value: string) => void', default: 'undefined', description: '值变化时的回调函数' },
+          { prop: 'placeholder', type: 'string', default: '"Select option..."', description: '占位符文本' },
+          { prop: 'searchPlaceholder', type: 'string', default: '"Search..."', description: '搜索框占位符' },
+          { prop: 'emptyText', type: 'string', default: '"No option found."', description: '无结果时的提示文本' },
+          { prop: 'disabled', type: 'boolean', default: 'false', description: '是否禁用' },
+          { prop: 'className', type: 'string', default: 'undefined', description: '额外的 CSS 类名' },
+        ]
+      case 'context-menu':
+        return [
+          { prop: 'ContextMenu', type: 'React.Component', default: '-', description: '上下文菜单根组件' },
+          { prop: 'ContextMenuTrigger', type: 'React.Component', default: '-', description: '上下文菜单触发器' },
+          { prop: 'ContextMenuTrigger.asChild', type: 'boolean', default: 'false', description: '是否作为子元素渲染' },
+          { prop: 'ContextMenuContent', type: 'React.Component', default: '-', description: '上下文菜单内容容器' },
+          { prop: 'ContextMenuItem', type: 'React.Component', default: '-', description: '菜单项' },
+          { prop: 'ContextMenuItem.inset', type: 'boolean', default: 'false', description: '是否增加左侧内边距' },
+          { prop: 'ContextMenuItem.disabled', type: 'boolean', default: 'false', description: '是否禁用' },
+          { prop: 'ContextMenuLabel', type: 'React.Component', default: '-', description: '菜单标签' },
+          { prop: 'ContextMenuSeparator', type: 'React.Component', default: '-', description: '菜单分隔符' },
+          { prop: '...props', type: 'ContextMenuPrimitive props', default: '-', description: '继承所有 Radix UI ContextMenu 的属性' },
+        ]
       default:
         return []
     }
@@ -165,6 +238,10 @@ export default function ComponentPage({ params }: { params: { name: string } }) 
                 {componentName === 'Radio Group' && 'A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time.'}
                 {componentName === 'Switch' && 'A control that allows the user to toggle between on and off states.'}
                 {componentName === 'Tabs' && 'A set of layered sections of content—known as tab panels—that are displayed one at a time.'}
+                {componentName === 'Select' && 'Displays a list of options for the user to pick from—triggered by a button.'}
+                {componentName === 'Dropdown Menu' && 'Displays a menu to the user—such as a set of actions or functions—triggered by a button.'}
+                {componentName === 'Combobox' && 'Autocomplete input and command palette with a list of suggestions.'}
+                {componentName === 'Context Menu' && 'Displays a menu to the user—such as a set of actions or functions—triggered by a right click or long press.'}
               </p>
           </div>
 
@@ -823,7 +900,151 @@ export default function ComponentPage({ params }: { params: { name: string } }) 
                   </div>
                 </div>
               )}
-              {component.name !== 'button' && component.name !== 'input' && component.name !== 'label' && component.name !== 'card' && component.name !== 'checkbox' && component.name !== 'radio-group' && component.name !== 'switch' && component.name !== 'tabs' && (
+              {component.name === 'select' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Basic</h3>
+                    <Select>
+                      <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Select a fruit" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="apple">Apple</SelectItem>
+                        <SelectItem value="banana">Banana</SelectItem>
+                        <SelectItem value="blueberry">Blueberry</SelectItem>
+                        <SelectItem value="grapes">Grapes</SelectItem>
+                        <SelectItem value="pineapple">Pineapple</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">With Default Value</h3>
+                    <Select defaultValue="banana">
+                      <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Select a fruit" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="apple">Apple</SelectItem>
+                        <SelectItem value="banana">Banana</SelectItem>
+                        <SelectItem value="blueberry">Blueberry</SelectItem>
+                        <SelectItem value="grapes">Grapes</SelectItem>
+                        <SelectItem value="pineapple">Pineapple</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Disabled</h3>
+                    <Select disabled>
+                      <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Select a fruit" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="apple">Apple</SelectItem>
+                        <SelectItem value="banana">Banana</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              )}
+              {component.name === 'dropdown-menu' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Basic</h3>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="basic">Open Menu</Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent>
+                        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem>Profile</DropdownMenuItem>
+                        <DropdownMenuItem>Billing</DropdownMenuItem>
+                        <DropdownMenuItem>Team</DropdownMenuItem>
+                        <DropdownMenuItem>Subscription</DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">With Separators</h3>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="basic">Open Menu</Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent>
+                        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem>Profile</DropdownMenuItem>
+                        <DropdownMenuItem>Billing</DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem>Team</DropdownMenuItem>
+                        <DropdownMenuItem>Subscription</DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
+                </div>
+              )}
+              {component.name === 'combobox' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Basic</h3>
+                    <Combobox
+                      options={[
+                        { value: 'react', label: 'React' },
+                        { value: 'vue', label: 'Vue' },
+                        { value: 'angular', label: 'Angular' },
+                        { value: 'svelte', label: 'Svelte' },
+                      ]}
+                      placeholder="Select framework..."
+                    />
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">With Value</h3>
+                    <Combobox
+                      options={[
+                        { value: 'react', label: 'React' },
+                        { value: 'vue', label: 'Vue' },
+                        { value: 'angular', label: 'Angular' },
+                        { value: 'svelte', label: 'Svelte' },
+                      ]}
+                      value="react"
+                      placeholder="Select framework..."
+                    />
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Disabled</h3>
+                    <Combobox
+                      options={[
+                        { value: 'react', label: 'React' },
+                        { value: 'vue', label: 'Vue' },
+                      ]}
+                      disabled
+                      placeholder="Select framework..."
+                    />
+                  </div>
+                </div>
+              )}
+              {component.name === 'context-menu' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Basic</h3>
+                    <ContextMenu>
+                      <ContextMenuTrigger className="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">
+                        Right click here
+                      </ContextMenuTrigger>
+                      <ContextMenuContent>
+                        <ContextMenuLabel>My Account</ContextMenuLabel>
+                        <ContextMenuSeparator />
+                        <ContextMenuItem>Profile</ContextMenuItem>
+                        <ContextMenuItem>Billing</ContextMenuItem>
+                        <ContextMenuItem>Team</ContextMenuItem>
+                        <ContextMenuSeparator />
+                        <ContextMenuItem>Subscription</ContextMenuItem>
+                      </ContextMenuContent>
+                    </ContextMenu>
+                  </div>
+                </div>
+              )}
+              {component.name !== 'button' && component.name !== 'input' && component.name !== 'label' && component.name !== 'card' && component.name !== 'checkbox' && component.name !== 'radio-group' && component.name !== 'switch' && component.name !== 'tabs' && component.name !== 'select' && component.name !== 'dropdown-menu' && component.name !== 'combobox' && component.name !== 'context-menu' && (
                 <p className="text-muted-foreground">组件预览即将添加</p>
               )}
             </div>
@@ -851,6 +1072,60 @@ export default function ComponentPage({ params }: { params: { name: string } }) 
   </TabsList>
   <TabsContent value="account">Content</TabsContent>
 </Tabs>`
+                  } else if (component.name === 'select') {
+                    return `import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+
+<Select>
+  <SelectTrigger>
+    <SelectValue placeholder="Select option" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="option1">Option 1</SelectItem>
+    <SelectItem value="option2">Option 2</SelectItem>
+  </SelectContent>
+</Select>`
+                  } else if (component.name === 'dropdown-menu') {
+                    return `import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="basic">Open</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuItem>Item 1</DropdownMenuItem>
+    <DropdownMenuItem>Item 2</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>`
+                  } else if (component.name === 'combobox') {
+                    return `import { Combobox } from "@/components/ui/combobox"
+
+<Combobox
+  options={[
+    { value: 'option1', label: 'Option 1' },
+    { value: 'option2', label: 'Option 2' },
+  ]}
+  placeholder="Select option..."
+/>`
+                  } else if (component.name === 'context-menu') {
+                    return `import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu"
+
+<ContextMenu>
+  <ContextMenuTrigger>Right click</ContextMenuTrigger>
+  <ContextMenuContent>
+    <ContextMenuItem>Item 1</ContextMenuItem>
+    <ContextMenuItem>Item 2</ContextMenuItem>
+  </ContextMenuContent>
+</ContextMenu>`
                   } else {
                     return `import { ${componentName} } from "@/components/ui/${component.name}"
 

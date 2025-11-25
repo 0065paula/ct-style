@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "name": "dropdown-menu",
+  "type": "component",
+  "files": [
+    {
+      "path": "templates/component/dropdown-menu.tsx",
+      "type": "component",
+      "target": "components/ui/dropdown-menu.tsx"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-dropdown-menu"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}
+
