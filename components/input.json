@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "name": "input",
+  "type": "component",
+  "files": [
+    {
+      "path": "templates/component/input.tsx",
+      "type": "component",
+      "target": "components/ui/input.tsx"
+    }
+  ],
+  "dependencies": [],
+  "registryDependencies": [
+    "utils"
+  ]
+}
+

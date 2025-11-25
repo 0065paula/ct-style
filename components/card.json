@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "name": "card",
+  "type": "component",
+  "files": [
+    {
+      "path": "templates/component/card.tsx",
+      "type": "component",
+      "target": "components/ui/card.tsx"
+    }
+  ],
+  "dependencies": [],
+  "registryDependencies": [
+    "utils"
+  ]
+}
+

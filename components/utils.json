@@ -1,0 +1,18 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "name": "utils",
+  "type": "lib",
+  "files": [
+    {
+      "path": "templates/utils/cn.ts",
+      "type": "lib",
+      "target": "lib/utils.ts"
+    }
+  ],
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": []
+}
+

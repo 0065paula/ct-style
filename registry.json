@@ -1,0 +1,34 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "internal-light-ui",
+  "description": "Internal lightweight UI registry for company tools",
+  "author": "Company Frontend Team",
+  "items": [
+    {
+      "name": "button",
+      "type": "component",
+      "path": "components/button.json"
+    },
+    {
+      "name": "input",
+      "type": "component",
+      "path": "components/input.json"
+    },
+    {
+      "name": "card",
+      "type": "component",
+      "path": "components/card.json"
+    },
+    {
+      "name": "label",
+      "type": "component",
+      "path": "components/label.json"
+    },
+    {
+      "name": "utils",
+      "type": "lib",
+      "path": "components/utils.json"
+    }
+  ]
+}
+

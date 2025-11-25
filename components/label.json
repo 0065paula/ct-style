@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "name": "label",
+  "type": "component",
+  "files": [
+    {
+      "path": "templates/component/label.tsx",
+      "type": "component",
+      "target": "components/ui/label.tsx"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-label",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}
+

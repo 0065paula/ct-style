@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "name": "button",
+  "type": "component",
+  "files": [
+    {
+      "path": "templates/component/button.tsx",
+      "type": "component",
+      "target": "components/ui/button.tsx"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}
+
