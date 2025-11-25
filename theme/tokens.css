@@ -76,6 +76,41 @@
     --input-focus-shadow: 0px 0px 0px 4px rgba(0, 136, 255, 0.16);
     --input-focus-shadow-error: 0px 0px 0px 4px rgba(255, 74, 74, 0.16);
     --input-hover-shadow: 0px 0px 0px 4px rgba(225, 230, 241, 0.6);
+
+    /* Checkbox Colors - CloudTower UI */
+    --checkbox-bg-unchecked: #FFFFFF;
+    --checkbox-bg-checked: #0080FF;
+    --checkbox-bg-checked-hover: #005ED1;
+    --checkbox-bg-disabled: rgba(211, 218, 235, 0.6);
+    --checkbox-border-unchecked: rgba(107, 128, 167, 0.6);
+    --checkbox-border-unchecked-hover: #0080FF;
+    --checkbox-border-checked: #0080FF;
+    --checkbox-border-checked-hover: #005ED1;
+    --checkbox-border-disabled: rgba(107, 128, 167, 0.6);
+    --checkbox-icon: #FFFFFF;
+
+    /* Radio Group Colors - CloudTower UI */
+    --radio-bg-unchecked: #FFFFFF;
+    --radio-bg-checked: #0080FF;
+    --radio-border-unchecked: rgba(107, 128, 167, 0.6);
+    --radio-border-unchecked-hover: #0080FF;
+    --radio-border-checked: #0080FF;
+    --radio-border-disabled: rgba(107, 128, 167, 0.6);
+    --radio-bg-disabled: rgba(211, 218, 235, 0.6);
+    --radio-dot: #FFFFFF;
+    --radio-dot-disabled: rgba(10, 37, 85, 0.6);
+
+    /* Switch Colors - CloudTower UI */
+    --switch-bg-unchecked: rgba(172, 186, 211, 0.6);
+    --switch-bg-unchecked-hover: rgba(107, 128, 167, 0.6);
+    --switch-bg-unchecked-disabled: rgba(192, 203, 224, 0.6);
+    --switch-bg-checked: #00BA5D;
+    --switch-bg-checked-hover: #008F4C;
+    --switch-bg-checked-disabled: #00BA5D;
+    --switch-thumb: #FFFFFF;
+    --switch-thumb-shadow-sm: 0px 1px 8px 0px rgba(0, 0, 0, 0.2);
+    --switch-thumb-shadow-md: 0px 2px 12px 0px rgba(0, 0, 0, 0.2);
+    --switch-thumb-shadow-lg: 0px 3px 16px 0px rgba(0, 0, 0, 0.2);
   }
 
   .dark {

@@ -25,6 +25,26 @@
       "path": "components/label.json"
     },
     {
+      "name": "checkbox",
+      "type": "component",
+      "path": "components/checkbox.json"
+    },
+    {
+      "name": "radio-group",
+      "type": "component",
+      "path": "components/radio-group.json"
+    },
+    {
+      "name": "switch",
+      "type": "component",
+      "path": "components/switch.json"
+    },
+    {
+      "name": "tabs",
+      "type": "component",
+      "path": "components/tabs.json"
+    },
+    {
       "name": "utils",
       "type": "lib",
       "path": "components/utils.json"

@@ -7,6 +7,10 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card'
+import { Checkbox } from '@/components/ui/checkbox'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { Switch } from '@/components/ui/switch'
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 
 const TableOfContents = dynamic(() => import('../../../components/layout/toc').then(mod => ({ default: mod.TableOfContents })), {
   ssr: false,
@@ -39,7 +43,10 @@ export default function ComponentPage({ params }: { params: { name: string } }) 
     notFound()
   }
 
-  const componentName = component.name.charAt(0).toUpperCase() + component.name.slice(1)
+  const componentName = component.name
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')
   
   // API 参数表格数据
   const getApiProps = (name: string) => {
@@ -82,6 +89,59 @@ export default function ComponentPage({ params }: { params: { name: string } }) 
           { prop: 'CardFooter.className', type: 'string', default: 'undefined', description: '额外的 CSS 类名' },
           { prop: '...props', type: 'HTMLAttributes<HTMLDivElement>', default: '-', description: '所有子组件继承对应的 HTML 元素属性' },
         ]
+      case 'checkbox':
+        return [
+          { prop: 'checked', type: 'boolean', default: 'undefined', description: '是否选中（受控）' },
+          { prop: 'defaultChecked', type: 'boolean', default: 'false', description: '默认是否选中（非受控）' },
+          { prop: 'disabled', type: 'boolean', default: 'false', description: '是否禁用' },
+          { prop: 'required', type: 'boolean', default: 'false', description: '是否必填' },
+          { prop: 'name', type: 'string', default: 'undefined', description: '表单字段名称' },
+          { prop: 'value', type: 'string', default: 'undefined', description: '表单字段值' },
+          { prop: 'className', type: 'string', default: 'undefined', description: '额外的 CSS 类名' },
+          { prop: '...props', type: 'CheckboxPrimitive.Root props', default: '-', description: '继承所有 Radix UI Checkbox 的属性' },
+        ]
+      case 'radio-group':
+        return [
+          { prop: 'RadioGroup', type: 'React.Component', default: '-', description: '单选按钮组容器' },
+          { prop: 'RadioGroup.value', type: 'string', default: 'undefined', description: '当前选中的值（受控）' },
+          { prop: 'RadioGroup.defaultValue', type: 'string', default: 'undefined', description: '默认选中的值（非受控）' },
+          { prop: 'RadioGroup.disabled', type: 'boolean', default: 'false', description: '是否禁用整个组' },
+          { prop: 'RadioGroup.className', type: 'string', default: 'undefined', description: '额外的 CSS 类名' },
+          { prop: 'RadioGroupItem', type: 'React.Component', default: '-', description: '单选按钮项' },
+          { prop: 'RadioGroupItem.value', type: 'string', default: '-', description: '该项的值（必需）' },
+          { prop: 'RadioGroupItem.disabled', type: 'boolean', default: 'false', description: '是否禁用该项' },
+          { prop: 'RadioGroupItem.className', type: 'string', default: 'undefined', description: '额外的 CSS 类名' },
+          { prop: '...props', type: 'RadioGroupPrimitive props', default: '-', description: '继承所有 Radix UI RadioGroup 的属性' },
+        ]
+      case 'switch':
+        return [
+          { prop: 'checked', type: 'boolean', default: 'undefined', description: '是否开启（受控）' },
+          { prop: 'defaultChecked', type: 'boolean', default: 'false', description: '默认是否开启（非受控）' },
+          { prop: 'disabled', type: 'boolean', default: 'false', description: '是否禁用' },
+          { prop: 'required', type: 'boolean', default: 'false', description: '是否必填' },
+          { prop: 'name', type: 'string', default: 'undefined', description: '表单字段名称' },
+          { prop: 'value', type: 'string', default: 'undefined', description: '表单字段值' },
+          { prop: 'className', type: 'string', default: 'undefined', description: '额外的 CSS 类名' },
+          { prop: '...props', type: 'SwitchPrimitives.Root props', default: '-', description: '继承所有 Radix UI Switch 的属性' },
+        ]
+      case 'tabs':
+        return [
+          { prop: 'Tabs', type: 'React.Component', default: '-', description: '标签页容器' },
+          { prop: 'Tabs.value', type: 'string', default: 'undefined', description: '当前激活的标签页（受控）' },
+          { prop: 'Tabs.defaultValue', type: 'string', default: 'undefined', description: '默认激活的标签页（非受控）' },
+          { prop: 'Tabs.orientation', type: '"horizontal" | "vertical"', default: '"horizontal"', description: '标签页方向' },
+          { prop: 'Tabs.className', type: 'string', default: 'undefined', description: '额外的 CSS 类名' },
+          { prop: 'TabsList', type: 'React.Component', default: '-', description: '标签页列表容器' },
+          { prop: 'TabsList.className', type: 'string', default: 'undefined', description: '额外的 CSS 类名' },
+          { prop: 'TabsTrigger', type: 'React.Component', default: '-', description: '标签页触发器' },
+          { prop: 'TabsTrigger.value', type: 'string', default: '-', description: '标签页的值（必需）' },
+          { prop: 'TabsTrigger.disabled', type: 'boolean', default: 'false', description: '是否禁用' },
+          { prop: 'TabsTrigger.className', type: 'string', default: 'undefined', description: '额外的 CSS 类名' },
+          { prop: 'TabsContent', type: 'React.Component', default: '-', description: '标签页内容' },
+          { prop: 'TabsContent.value', type: 'string', default: '-', description: '内容对应的标签页值（必需）' },
+          { prop: 'TabsContent.className', type: 'string', default: 'undefined', description: '额外的 CSS 类名' },
+          { prop: '...props', type: 'TabsPrimitive props', default: '-', description: '继承所有 Radix UI Tabs 的属性' },
+        ]
       default:
         return []
     }
@@ -96,12 +156,16 @@ export default function ComponentPage({ params }: { params: { name: string } }) 
         <div className="container mx-auto px-4 py-8 max-w-4xl">
           <div className="mb-8">
             <h1 className="text-4xl font-bold mb-2">{componentName}</h1>
-            <p className="text-muted-foreground">
-              {componentName === 'Button' && 'Displays a button or a component that looks like a button.'}
-              {componentName === 'Input' && 'A form input component with various sizes and variants.'}
-              {componentName === 'Card' && 'Displays a card with header, content, and footer.'}
-              {componentName === 'Label' && 'A label component for form inputs.'}
-            </p>
+              <p className="text-muted-foreground">
+                {componentName === 'Button' && 'Displays a button or a component that looks like a button.'}
+                {componentName === 'Input' && 'A form input component with various sizes and variants.'}
+                {componentName === 'Card' && 'Displays a card with header, content, and footer.'}
+                {componentName === 'Label' && 'A label component for form inputs.'}
+                {componentName === 'Checkbox' && 'A control that allows the user to toggle between checked and unchecked states.'}
+                {componentName === 'Radio Group' && 'A set of checkable buttons—known as radio buttons—where no more than one of the buttons can be checked at a time.'}
+                {componentName === 'Switch' && 'A control that allows the user to toggle between on and off states.'}
+                {componentName === 'Tabs' && 'A set of layered sections of content—known as tab panels—that are displayed one at a time.'}
+              </p>
           </div>
 
           <section id="installation" className="mb-12">
@@ -593,7 +657,173 @@ export default function ComponentPage({ params }: { params: { name: string } }) 
                   </div>
                 </div>
               )}
-              {component.name !== 'button' && component.name !== 'input' && component.name !== 'label' && component.name !== 'card' && (
+              {component.name === 'checkbox' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Basic</h3>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox id="terms" />
+                      <Label htmlFor="terms" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                        Accept terms and conditions
+                      </Label>
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Checked</h3>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox id="checked" defaultChecked />
+                      <Label htmlFor="checked" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                        Already checked
+                      </Label>
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Disabled</h3>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox id="disabled" disabled />
+                      <Label htmlFor="disabled" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                        Disabled checkbox
+                      </Label>
+                    </div>
+                  </div>
+                </div>
+              )}
+              {component.name === 'radio-group' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Basic</h3>
+                    <RadioGroup defaultValue="option-one">
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="option-one" id="option-one" />
+                        <Label htmlFor="option-one">Option One</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="option-two" id="option-two" />
+                        <Label htmlFor="option-two">Option Two</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="option-three" id="option-three" />
+                        <Label htmlFor="option-three">Option Three</Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Horizontal</h3>
+                    <RadioGroup defaultValue="comfortable" className="flex space-x-4">
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="default" id="r1" />
+                        <Label htmlFor="r1">Default</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="comfortable" id="r2" />
+                        <Label htmlFor="r2">Comfortable</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="compact" id="r3" />
+                        <Label htmlFor="r3">Compact</Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Disabled</h3>
+                    <RadioGroup defaultValue="option-one" disabled>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="option-one" id="disabled-one" />
+                        <Label htmlFor="disabled-one">Option One</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="option-two" id="disabled-two" />
+                        <Label htmlFor="disabled-two">Option Two</Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
+                </div>
+              )}
+              {component.name === 'switch' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Basic</h3>
+                    <div className="flex items-center space-x-2">
+                      <Switch id="airplane-mode" />
+                      <Label htmlFor="airplane-mode">Airplane Mode</Label>
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Checked</h3>
+                    <div className="flex items-center space-x-2">
+                      <Switch id="checked-switch" defaultChecked />
+                      <Label htmlFor="checked-switch">Enabled</Label>
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Disabled</h3>
+                    <div className="flex items-center space-x-2">
+                      <Switch id="disabled-switch" disabled />
+                      <Label htmlFor="disabled-switch">Disabled</Label>
+                    </div>
+                  </div>
+                </div>
+              )}
+              {component.name === 'tabs' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Basic</h3>
+                    <Tabs defaultValue="account" className="w-full max-w-md">
+                      <TabsList>
+                        <TabsTrigger value="account">Account</TabsTrigger>
+                        <TabsTrigger value="password">Password</TabsTrigger>
+                      </TabsList>
+                      <TabsContent value="account">
+                        <Card>
+                          <CardHeader>
+                            <CardTitle>Account</CardTitle>
+                            <CardDescription>
+                              Make changes to your account here. Click save when you're done.
+                            </CardDescription>
+                          </CardHeader>
+                          <CardContent className="space-y-2">
+                            <div className="space-y-2">
+                              <Label htmlFor="name">Name</Label>
+                              <Input id="name" defaultValue="Pedro Duarte" />
+                            </div>
+                            <div className="space-y-2">
+                              <Label htmlFor="username">Username</Label>
+                              <Input id="username" defaultValue="@peduarte" />
+                            </div>
+                          </CardContent>
+                          <CardFooter>
+                            <Button>Save changes</Button>
+                          </CardFooter>
+                        </Card>
+                      </TabsContent>
+                      <TabsContent value="password">
+                        <Card>
+                          <CardHeader>
+                            <CardTitle>Password</CardTitle>
+                            <CardDescription>
+                              Change your password here. After saving, you'll be logged out.
+                            </CardDescription>
+                          </CardHeader>
+                          <CardContent className="space-y-2">
+                            <div className="space-y-2">
+                              <Label htmlFor="current">Current password</Label>
+                              <Input id="current" type="password" />
+                            </div>
+                            <div className="space-y-2">
+                              <Label htmlFor="new">New password</Label>
+                              <Input id="new" type="password" />
+                            </div>
+                          </CardContent>
+                          <CardFooter>
+                            <Button>Save password</Button>
+                          </CardFooter>
+                        </Card>
+                      </TabsContent>
+                    </Tabs>
+                  </div>
+                </div>
+              )}
+              {component.name !== 'button' && component.name !== 'input' && component.name !== 'label' && component.name !== 'card' && component.name !== 'checkbox' && component.name !== 'radio-group' && component.name !== 'switch' && component.name !== 'tabs' && (
                 <p className="text-muted-foreground">组件预览即将添加</p>
               )}
             </div>
@@ -602,9 +832,31 @@ export default function ComponentPage({ params }: { params: { name: string } }) 
                 <Copy className="h-4 w-4" />
               </button>
               <pre className="text-sm overflow-x-auto">
-                <code>{`import { ${componentName} } from "@/components/ui/${component.name}"
+                <code>{(() => {
+                  if (component.name === 'radio-group') {
+                    return `import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 
-<${componentName} />`}</code>
+<RadioGroup defaultValue="option-one">
+  <div className="flex items-center space-x-2">
+    <RadioGroupItem value="option-one" id="option-one" />
+    <Label htmlFor="option-one">Option One</Label>
+  </div>
+</RadioGroup>`
+                  } else if (component.name === 'tabs') {
+                    return `import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
+
+<Tabs defaultValue="account">
+  <TabsList>
+    <TabsTrigger value="account">Account</TabsTrigger>
+  </TabsList>
+  <TabsContent value="account">Content</TabsContent>
+</Tabs>`
+                  } else {
+                    return `import { ${componentName} } from "@/components/ui/${component.name}"
+
+<${componentName} />`
+                  }
+                })()}</code>
               </pre>
             </div>
           </section>

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "name": "radio-group",
+  "type": "component",
+  "files": [
+    {
+      "path": "templates/component/radio-group.tsx",
+      "type": "component",
+      "target": "components/ui/radio-group.tsx"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-radio-group",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}
+

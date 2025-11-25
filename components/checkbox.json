@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "name": "checkbox",
+  "type": "component",
+  "files": [
+    {
+      "path": "templates/component/checkbox.tsx",
+      "type": "component",
+      "target": "components/ui/checkbox.tsx"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-checkbox",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}
+

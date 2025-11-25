@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "name": "tabs",
+  "type": "component",
+  "files": [
+    {
+      "path": "templates/component/tabs.tsx",
+      "type": "component",
+      "target": "components/ui/tabs.tsx"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-tabs"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}
+
