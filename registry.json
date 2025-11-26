@@ -80,6 +80,26 @@
       "path": "components/context-menu.json"
     },
     {
+      "name": "skeleton",
+      "type": "component",
+      "path": "components/skeleton.json"
+    },
+    {
+      "name": "spinner",
+      "type": "component",
+      "path": "components/spinner.json"
+    },
+    {
+      "name": "sonner",
+      "type": "component",
+      "path": "components/sonner.json"
+    },
+    {
+      "name": "field",
+      "type": "component",
+      "path": "components/field.json"
+    },
+    {
       "name": "utils",
       "type": "lib",
       "path": "components/utils.json"

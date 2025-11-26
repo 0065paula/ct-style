@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { Copy } from 'lucide-react'
+import { Copy, ArrowLeft, Archive, Flag, Clock, MoreHorizontal, Mail, Calendar, List, Tag, Trash2, ChevronRight, ArrowUp, ArrowDown, Settings } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import registry from '../../../../../registry.json'
 import { Sidebar } from '../../../components/layout/sidebar'
@@ -29,6 +29,12 @@ import {
   ContextMenuSeparator,
   ContextMenuTrigger,
 } from '@/components/ui/context-menu'
+import { ButtonGroup } from '@/components/ui/button-group'
+import { Skeleton } from '@/components/ui/skeleton'
+import { Spinner } from '@/components/ui/spinner'
+import { FieldDemo } from '../../../components/field-demo'
+import { SonnerDemo } from '../../../components/sonner-demo'
+import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover'
 
 const TableOfContents = dynamic(() => import('../../../components/layout/toc').then(mod => ({ default: mod.TableOfContents })), {
   ssr: false,
@@ -215,6 +221,56 @@ export default function ComponentPage({ params }: { params: { name: string } }) 
           { prop: 'ContextMenuSeparator', type: 'React.Component', default: '-', description: '菜单分隔符' },
           { prop: '...props', type: 'ContextMenuPrimitive props', default: '-', description: '继承所有 Radix UI ContextMenu 的属性' },
         ]
+      case 'button-group':
+        return [
+          { prop: 'orientation', type: '"horizontal" | "vertical"', default: '"horizontal"', description: '按钮组方向' },
+          { prop: 'className', type: 'string', default: 'undefined', description: '额外的 CSS 类名' },
+          { prop: '...props', type: 'HTMLDivElement props', default: '-', description: '继承所有 div 元素的属性' },
+        ]
+      case 'skeleton':
+        return [
+          { prop: 'className', type: 'string', default: 'undefined', description: '额外的 CSS 类名' },
+          { prop: '...props', type: 'HTMLDivElement props', default: '-', description: '继承所有 div 元素的属性' },
+        ]
+      case 'spinner':
+        return [
+          { prop: 'size', type: '"sm" | "default" | "lg"', default: '"default"', description: '旋转器大小' },
+          { prop: 'variant', type: '"default" | "primary" | "secondary"', default: '"default"', description: '旋转器变体' },
+          { prop: 'className', type: 'string', default: 'undefined', description: '额外的 CSS 类名' },
+          { prop: '...props', type: 'HTMLDivElement props', default: '-', description: '继承所有 div 元素的属性' },
+        ]
+      case 'sonner':
+        return [
+          { prop: 'position', type: '"top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right"', default: '"bottom-right"', description: 'Toast 位置' },
+          { prop: 'expand', type: 'boolean', default: 'false', description: '是否展开所有 Toast' },
+          { prop: 'richColors', type: 'boolean', default: 'false', description: '是否使用丰富的颜色' },
+          { prop: 'closeButton', type: 'boolean', default: 'false', description: '是否显示关闭按钮' },
+          { prop: '...props', type: 'ToasterProps', default: '-', description: '继承所有 Sonner Toaster 的属性' },
+        ]
+      case 'field':
+        return [
+          { prop: 'Field', type: 'React.Component', default: '-', description: '字段容器组件' },
+          { prop: 'Field.className', type: 'string', default: 'undefined', description: '额外的 CSS 类名' },
+          { prop: 'FieldLabel', type: 'React.Component', default: '-', description: '字段标签组件' },
+          { prop: 'FieldLabel.htmlFor', type: 'string', default: 'undefined', description: '关联的表单元素 ID' },
+          { prop: 'FieldDescription', type: 'React.Component', default: '-', description: '字段描述组件' },
+          { prop: 'FieldErrorMessage', type: 'React.Component', default: '-', description: '字段错误消息组件' },
+          { prop: '...props', type: 'HTMLDivElement props', default: '-', description: '继承所有 div 元素的属性' },
+        ]
+      case 'popover':
+        return [
+          { prop: 'Popover', type: 'React.Component', default: '-', description: '弹出框根组件' },
+          { prop: 'Popover.open', type: 'boolean', default: 'undefined', description: '是否打开（受控）' },
+          { prop: 'Popover.defaultOpen', type: 'boolean', default: 'undefined', description: '默认是否打开（非受控）' },
+          { prop: 'Popover.onOpenChange', type: '(open: boolean) => void', default: 'undefined', description: '打开状态变化时的回调函数' },
+          { prop: 'PopoverTrigger', type: 'React.Component', default: '-', description: '弹出框触发器' },
+          { prop: 'PopoverTrigger.asChild', type: 'boolean', default: 'false', description: '是否作为子元素渲染' },
+          { prop: 'PopoverContent', type: 'React.Component', default: '-', description: '弹出框内容容器' },
+          { prop: 'PopoverContent.align', type: '"start" | "center" | "end"', default: '"center"', description: '对齐方式' },
+          { prop: 'PopoverContent.sideOffset', type: 'number', default: '4', description: '与触发器的偏移距离' },
+          { prop: 'PopoverContent.className', type: 'string', default: 'undefined', description: '额外的 CSS 类名' },
+          { prop: '...props', type: 'PopoverPrimitive props', default: '-', description: '继承所有 Radix UI Popover 的属性' },
+        ]
       default:
         return []
     }
@@ -242,6 +298,12 @@ export default function ComponentPage({ params }: { params: { name: string } }) 
                 {componentName === 'Dropdown Menu' && 'Displays a menu to the user—such as a set of actions or functions—triggered by a button.'}
                 {componentName === 'Combobox' && 'Autocomplete input and command palette with a list of suggestions.'}
                 {componentName === 'Context Menu' && 'Displays a menu to the user—such as a set of actions or functions—triggered by a right click or long press.'}
+                {componentName === 'Button Group' && 'A container component that groups multiple buttons together with seamless borders.'}
+                {componentName === 'Skeleton' && 'Use to show a placeholder while content is loading.'}
+                {componentName === 'Spinner' && 'A loading spinner component to indicate that content is being loaded.'}
+                {componentName === 'Sonner' && 'An opinionated toast component for React.'}
+                {componentName === 'Field' && 'A form field component that provides label, description, and error message support.'}
+                {componentName === 'Popover' && 'Displays rich content in a portal, triggered by a button.'}
               </p>
           </div>
 
@@ -1044,7 +1106,198 @@ export default function ComponentPage({ params }: { params: { name: string } }) 
                   </div>
                 </div>
               )}
-              {component.name !== 'button' && component.name !== 'input' && component.name !== 'label' && component.name !== 'card' && component.name !== 'checkbox' && component.name !== 'radio-group' && component.name !== 'switch' && component.name !== 'tabs' && component.name !== 'select' && component.name !== 'dropdown-menu' && component.name !== 'combobox' && component.name !== 'context-menu' && (
+              {component.name === 'button-group' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Horizontal</h3>
+                    <ButtonGroup>
+                      <Button variant="basic">One</Button>
+                      <Button variant="basic">Two</Button>
+                      <Button variant="basic">Three</Button>
+                    </ButtonGroup>
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Vertical</h3>
+                    <ButtonGroup orientation="vertical">
+                      <Button variant="quiet" size="icon">
+                        <ArrowUp className="h-4 w-4" />
+                      </Button>
+                      <Button variant="quiet" size="icon">
+                        <ArrowDown className="h-4 w-4" />
+                      </Button>
+                      <Button variant="quiet" size="icon">
+                        <Settings className="h-4 w-4" />
+                      </Button>
+                    </ButtonGroup>
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">With Actions</h3>
+                    <ButtonGroup>
+                      <Button variant="basic" size="icon">
+                        <ArrowLeft className="h-4 w-4" />
+                      </Button>
+                      <Button variant="basic">Archive</Button>
+                      <Button variant="basic">Report</Button>
+                      <Button variant="basic">Snooze</Button>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="basic" size="icon">
+                            <MoreHorizontal className="h-4 w-4" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          <DropdownMenuItem>
+                            <Mail className="mr-2 h-4 w-4" />
+                            <span>Mark as Read</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem>
+                            <Archive className="mr-2 h-4 w-4" />
+                            <span>Archive</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem>
+                            <Clock className="mr-2 h-4 w-4" />
+                            <span>Snooze</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem>
+                            <Calendar className="mr-2 h-4 w-4" />
+                            <span>Add to Calendar</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem>
+                            <List className="mr-2 h-4 w-4" />
+                            <span>Add to List</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem>
+                            <Tag className="mr-2 h-4 w-4" />
+                            <span>Label As...</span>
+                            <ChevronRight className="ml-auto h-4 w-4" />
+                          </DropdownMenuItem>
+                          <DropdownMenuSeparator />
+                          <DropdownMenuItem className="text-destructive">
+                            <Trash2 className="mr-2 h-4 w-4" />
+                            <span>Trash</span>
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </ButtonGroup>
+                  </div>
+                </div>
+              )}
+              {component.name === 'skeleton' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Basic</h3>
+                    <div className="space-y-2">
+                      <Skeleton className="h-4 w-[250px]" />
+                      <Skeleton className="h-4 w-[200px]" />
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Card Skeleton</h3>
+                    <div className="flex items-center space-x-4">
+                      <Skeleton className="h-12 w-12 rounded-full" />
+                      <div className="space-y-2">
+                        <Skeleton className="h-4 w-[250px]" />
+                        <Skeleton className="h-4 w-[200px]" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Form Skeleton</h3>
+                    <div className="space-y-4">
+                      <Skeleton className="h-10 w-full" />
+                      <Skeleton className="h-10 w-full" />
+                      <Skeleton className="h-20 w-full" />
+                    </div>
+                  </div>
+                </div>
+              )}
+              {component.name === 'spinner' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Sizes</h3>
+                    <div className="flex items-center gap-4">
+                      <Spinner size="sm" />
+                      <Spinner size="default" />
+                      <Spinner size="lg" />
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Variants</h3>
+                    <div className="flex items-center gap-4">
+                      <Spinner variant="default" />
+                      <Spinner variant="primary" />
+                      <Spinner variant="secondary" />
+                    </div>
+                  </div>
+                </div>
+              )}
+              {component.name === 'sonner' && <SonnerDemo />}
+              {component.name === 'field' && <FieldDemo />}
+              {component.name === 'popover' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Basic</h3>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button variant="basic">Open Popover</Button>
+                      </PopoverTrigger>
+                      <PopoverContent>
+                        <div className="space-y-2">
+                          <h4 className="font-medium leading-none">Dimensions</h4>
+                          <p className="text-sm text-muted-foreground">
+                            Set the dimensions for the layer.
+                          </p>
+                        </div>
+                      </PopoverContent>
+                    </Popover>
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">With Form</h3>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button variant="basic">Open Form</Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-80">
+                        <div className="space-y-4">
+                          <div className="space-y-2">
+                            <h4 className="font-medium leading-none">Dimensions</h4>
+                            <p className="text-sm text-muted-foreground">
+                              Set the dimensions for the layer.
+                            </p>
+                          </div>
+                          <div className="grid gap-2">
+                            <div className="grid grid-cols-3 items-center gap-4">
+                              <Label htmlFor="width">Width</Label>
+                              <Input
+                                id="width"
+                                defaultValue="100%"
+                                className="col-span-2 h-8"
+                              />
+                            </div>
+                            <div className="grid grid-cols-3 items-center gap-4">
+                              <Label htmlFor="maxWidth">Max. width</Label>
+                              <Input
+                                id="maxWidth"
+                                defaultValue="300px"
+                                className="col-span-2 h-8"
+                              />
+                            </div>
+                            <div className="grid grid-cols-3 items-center gap-4">
+                              <Label htmlFor="height">Height</Label>
+                              <Input
+                                id="height"
+                                defaultValue="25px"
+                                className="col-span-2 h-8"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </PopoverContent>
+                    </Popover>
+                  </div>
+                </div>
+              )}
+              {component.name !== 'button' && component.name !== 'input' && component.name !== 'label' && component.name !== 'card' && component.name !== 'checkbox' && component.name !== 'radio-group' && component.name !== 'switch' && component.name !== 'tabs' && component.name !== 'select' && component.name !== 'dropdown-menu' && component.name !== 'combobox' && component.name !== 'context-menu' && component.name !== 'button-group' && component.name !== 'skeleton' && component.name !== 'spinner' && component.name !== 'sonner' && component.name !== 'field' && component.name !== 'popover' && (
                 <p className="text-muted-foreground">组件预览即将添加</p>
               )}
             </div>
@@ -1126,6 +1379,84 @@ export default function ComponentPage({ params }: { params: { name: string } }) 
     <ContextMenuItem>Item 2</ContextMenuItem>
   </ContextMenuContent>
 </ContextMenu>`
+                  } else if (component.name === 'button-group') {
+                    return `import { ButtonGroup } from "@/components/ui/button-group"
+import { Button } from "@/components/ui/button"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { ArrowLeft, MoreHorizontal, Mail, Archive, Clock, Calendar, List, Tag, ChevronRight, Trash2 } from "lucide-react"
+
+<ButtonGroup>
+  <Button variant="basic" size="icon">
+    <ArrowLeft className="h-4 w-4" />
+  </Button>
+  <Button variant="basic">Archive</Button>
+  <Button variant="basic">Report</Button>
+  <Button variant="basic">Snooze</Button>
+  <DropdownMenu>
+    <DropdownMenuTrigger asChild>
+      <Button variant="basic" size="icon">
+        <MoreHorizontal className="h-4 w-4" />
+      </Button>
+    </DropdownMenuTrigger>
+    <DropdownMenuContent align="end">
+      <DropdownMenuItem>
+        <Mail className="mr-2 h-4 w-4" />
+        <span>Mark as Read</span>
+      </DropdownMenuItem>
+      <DropdownMenuItem>
+        <Archive className="mr-2 h-4 w-4" />
+        <span>Archive</span>
+      </DropdownMenuItem>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem className="text-destructive">
+        <Trash2 className="mr-2 h-4 w-4" />
+        <span>Trash</span>
+      </DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</ButtonGroup>`
+                  } else if (component.name === 'skeleton') {
+                    return `import { Skeleton } from "@/components/ui/skeleton"
+
+<Skeleton className="h-4 w-[250px]" />`
+                  } else if (component.name === 'spinner') {
+                    return `import { Spinner } from "@/components/ui/spinner"
+
+<Spinner size="default" variant="primary" />`
+                  } else if (component.name === 'sonner') {
+                    return `import { Toaster } from "@/components/ui/sonner"
+import { toast } from "sonner"
+
+// Add to your app layout
+<Toaster />
+
+// Use in your components
+toast("Event has been created")`
+                  } else if (component.name === 'field') {
+                    return `import { Field, FieldLabel, FieldDescription, FieldErrorMessage } from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
+
+<Field>
+  <FieldLabel htmlFor="email">Email</FieldLabel>
+  <FieldDescription>Enter your email address</FieldDescription>
+  <Input id="email" type="email" />
+  <FieldErrorMessage>Email is required</FieldErrorMessage>
+</Field>`
+                  } else if (component.name === 'popover') {
+                    return `import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"
+import { Button } from "@/components/ui/button"
+
+<Popover>
+  <PopoverTrigger asChild>
+    <Button variant="basic">Open</Button>
+  </PopoverTrigger>
+  <PopoverContent>
+    <div className="space-y-2">
+      <h4 className="font-medium">Title</h4>
+      <p className="text-sm text-muted-foreground">Content goes here.</p>
+    </div>
+  </PopoverContent>
+</Popover>`
                   } else {
                     return `import { ${componentName} } from "@/components/ui/${component.name}"
 

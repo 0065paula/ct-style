@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "name": "skeleton",
+  "type": "component",
+  "files": [
+    {
+      "path": "templates/component/skeleton.tsx",
+      "type": "component",
+      "target": "components/ui/skeleton.tsx"
+    }
+  ],
+  "dependencies": [],
+  "registryDependencies": [
+    "utils"
+  ]
+}
+

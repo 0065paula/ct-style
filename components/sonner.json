@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "name": "sonner",
+  "type": "component",
+  "files": [
+    {
+      "path": "templates/component/sonner.tsx",
+      "type": "component",
+      "target": "components/ui/sonner.tsx"
+    }
+  ],
+  "dependencies": [
+    "sonner"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}
+

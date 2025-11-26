@@ -17,11 +17,12 @@ const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
           orientation === "horizontal"
             ? "flex-row"
             : "flex-col",
-          "[&>*:not(:first-child):not(:last-child)]:rounded-none",
-          "[&>*:first-child]:rounded-r-none",
-          "[&>*:last-child]:rounded-l-none",
-          "[&>*:not(:first-child)]:-ml-px",
+          orientation === "horizontal" && "[&>*:not(:first-child):not(:last-child)]:rounded-none",
+          orientation === "horizontal" && "[&>*:first-child]:rounded-r-none",
+          orientation === "horizontal" && "[&>*:last-child]:rounded-l-none",
+          orientation === "horizontal" && "[&>*:not(:first-child)]:-ml-px",
           orientation === "vertical" && "[&>*:not(:first-child)]:-mt-px [&>*:not(:first-child)]:ml-0",
+          orientation === "vertical" && "[&>*]:rounded-full",
           className
         )}
         role="group"
