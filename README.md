@@ -69,21 +69,55 @@ npm run build
 
 ## 📦 使用方式
 
-### 在项目中使用
+### 方式一：Git 仓库托管（推荐）
 
-在你的 Next.js 或 Vite 项目中，使用以下命令添加组件：
+1. **将 registry 推送到 Git 仓库**（GitHub、GitLab 等）
+
+2. **获取 Registry URL**:
+   - GitHub: `https://raw.githubusercontent.com/your-org/ct-style/main`
+   - GitLab: `https://gitlab.com/your-org/ct-style/-/raw/main`
+   - 或你的内部 Git 服务器 raw URL
+
+3. **在项目中使用**:
 
 ```bash
-npx shadcn@latest add button --registry https://your-registry-url
+# 初始化项目（首次使用）
+npx shadcn@latest init --registry https://raw.githubusercontent.com/your-org/ct-style/main
+
+# 添加组件
+npx shadcn@latest add button
+npx shadcn@latest add input card label
 ```
 
-### 本地开发测试
+### 方式二：本地 HTTP 服务器（开发测试）
 
-如果 registry 托管在本地或内网，可以使用本地路径：
+启动本地服务器：
 
 ```bash
-npx shadcn@latest add button --registry file:///path/to/this/registry
+npm run serve
+# 或指定端口
+npm run serve:registry
 ```
+
+然后在项目中使用：
+
+```bash
+npx shadcn@latest add button --registry http://localhost:3002
+```
+
+### 方式三：本地文件系统
+
+```bash
+npx shadcn@latest add button --registry file:///absolute/path/to/ct-style
+```
+
+### 查看可用组件
+
+```bash
+npx shadcn@latest list --registry <your-registry-url>
+```
+
+> 📖 详细部署指南请查看 [SETUP_GUIDE.md](./SETUP_GUIDE.md)
 
 ## 🎨 主题定制
 
