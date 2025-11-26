@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "name": "sheet",
+  "type": "component",
+  "files": [
+    {
+      "path": "templates/component/sheet.tsx",
+      "type": "component",
+      "target": "components/ui/sheet.tsx"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-dialog"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}
+

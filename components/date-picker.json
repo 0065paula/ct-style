@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "name": "date-picker",
+  "type": "component",
+  "files": [
+    {
+      "path": "templates/component/date-picker.tsx",
+      "type": "component",
+      "target": "components/ui/date-picker.tsx"
+    }
+  ],
+  "dependencies": [
+    "date-fns"
+  ],
+  "registryDependencies": [
+    "utils",
+    "button",
+    "calendar",
+    "popover"
+  ]
+}
+

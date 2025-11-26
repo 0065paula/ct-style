@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "name": "item",
+  "type": "component",
+  "files": [
+    {
+      "path": "templates/component/item.tsx",
+      "type": "component",
+      "target": "components/ui/item.tsx"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}
+

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "name": "calendar",
+  "type": "component",
+  "files": [
+    {
+      "path": "templates/component/calendar.tsx",
+      "type": "component",
+      "target": "components/ui/calendar.tsx"
+    }
+  ],
+  "dependencies": [
+    "react-day-picker"
+  ],
+  "registryDependencies": [
+    "utils",
+    "button"
+  ]
+}
+

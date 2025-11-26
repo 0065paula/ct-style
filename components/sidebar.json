@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "name": "sidebar",
+  "type": "component",
+  "files": [
+    {
+      "path": "templates/component/sidebar.tsx",
+      "type": "component",
+      "target": "components/ui/sidebar.tsx"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slot"
+  ],
+  "registryDependencies": [
+    "utils",
+    "button",
+    "input",
+    "separator",
+    "sheet",
+    "tooltip"
+  ]
+}
+

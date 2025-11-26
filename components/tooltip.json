@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "name": "tooltip",
+  "type": "component",
+  "files": [
+    {
+      "path": "templates/component/tooltip.tsx",
+      "type": "component",
+      "target": "components/ui/tooltip.tsx"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-tooltip"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}
+

@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation'
 import { Copy, ArrowLeft, Archive, Flag, Clock, MoreHorizontal, Mail, Calendar, List, Tag, Trash2, ChevronRight, ArrowUp, ArrowDown, Settings } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import registry from '../../../../../registry.json'
-import { Sidebar } from '../../../components/layout/sidebar'
+import { Sidebar as LayoutSidebar } from '../../../components/layout/sidebar'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -35,6 +35,102 @@ import { Spinner } from '@/components/ui/spinner'
 import { FieldDemo } from '../../../components/field-demo'
 import { SonnerDemo } from '../../../components/sonner-demo'
 import { Popover, PopoverTrigger, PopoverContent } from '@/components/ui/popover'
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+  BreadcrumbEllipsis,
+} from '@/components/ui/breadcrumb'
+import { Separator } from '@/components/ui/separator'
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
+import { Progress } from '@/components/ui/progress'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
+import { Textarea } from '@/components/ui/textarea'
+import { ResizableDemo } from '@/components/resizable-demo'
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
+import { DataTable } from '@/components/ui/data-table'
+import { DataTableDemo } from '@/components/data-table-demo'
+import { Slider } from '@/components/ui/slider'
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/components/ui/pagination'
+import { Item } from '@/components/ui/item'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarInset,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarProvider,
+  SidebarTrigger,
+  useSidebar,
+} from '@/components/ui/sidebar'
+import { SidebarDemo } from '@/components/sidebar-demo'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog'
+import { Badge } from '@/components/ui/badge'
+import { Calendar as CalendarComponent } from '@/components/ui/calendar'
+import { DatePicker } from '@/components/ui/date-picker'
+import { DatePickerDemo } from '@/components/date-picker-demo'
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet'
+import { SheetDemo, SheetSidesDemo } from '@/components/sheet-demo'
 
 const TableOfContents = dynamic(() => import('../../../components/layout/toc').then(mod => ({ default: mod.TableOfContents })), {
   ssr: false,
@@ -271,6 +367,220 @@ export default function ComponentPage({ params }: { params: { name: string } }) 
           { prop: 'PopoverContent.className', type: 'string', default: 'undefined', description: '额外的 CSS 类名' },
           { prop: '...props', type: 'PopoverPrimitive props', default: '-', description: '继承所有 Radix UI Popover 的属性' },
         ]
+      case 'breadcrumb':
+        return [
+          { prop: 'Breadcrumb', type: 'React.Component', default: '-', description: '面包屑导航根组件' },
+          { prop: 'Breadcrumb.separator', type: 'React.ReactNode', default: 'undefined', description: '自定义分隔符' },
+          { prop: 'BreadcrumbList', type: 'React.Component', default: '-', description: '面包屑列表容器' },
+          { prop: 'BreadcrumbItem', type: 'React.Component', default: '-', description: '面包屑项' },
+          { prop: 'BreadcrumbLink', type: 'React.Component', default: '-', description: '面包屑链接' },
+          { prop: 'BreadcrumbLink.asChild', type: 'boolean', default: 'false', description: '是否作为子元素渲染' },
+          { prop: 'BreadcrumbPage', type: 'React.Component', default: '-', description: '当前页面项' },
+          { prop: 'BreadcrumbSeparator', type: 'React.Component', default: '-', description: '分隔符组件' },
+          { prop: 'BreadcrumbEllipsis', type: 'React.Component', default: '-', description: '省略号组件' },
+          { prop: '...props', type: 'HTMLNavElement props', default: '-', description: '继承所有 nav 元素的属性' },
+        ]
+      case 'separator':
+        return [
+          { prop: 'orientation', type: '"horizontal" | "vertical"', default: '"horizontal"', description: '分隔符方向' },
+          { prop: 'decorative', type: 'boolean', default: 'true', description: '是否仅用于装饰（不传达语义信息）' },
+          { prop: 'className', type: 'string', default: 'undefined', description: '额外的 CSS 类名' },
+          { prop: '...props', type: 'SeparatorPrimitive props', default: '-', description: '继承所有 Radix UI Separator 的属性' },
+        ]
+      case 'scroll-area':
+        return [
+          { prop: 'ScrollArea', type: 'React.Component', default: '-', description: '滚动区域根组件' },
+          { prop: 'ScrollArea.className', type: 'string', default: 'undefined', description: '额外的 CSS 类名' },
+          { prop: 'ScrollBar', type: 'React.Component', default: '-', description: '滚动条组件' },
+          { prop: 'ScrollBar.orientation', type: '"horizontal" | "vertical"', default: '"vertical"', description: '滚动条方向' },
+          { prop: 'ScrollBar.className', type: 'string', default: 'undefined', description: '额外的 CSS 类名' },
+          { prop: '...props', type: 'ScrollAreaPrimitive props', default: '-', description: '继承所有 Radix UI ScrollArea 的属性' },
+        ]
+      case 'progress':
+        return [
+          { prop: 'value', type: 'number', default: 'undefined', description: '进度值（0-100）' },
+          { prop: 'className', type: 'string', default: 'undefined', description: '额外的 CSS 类名' },
+          { prop: '...props', type: 'ProgressPrimitive props', default: '-', description: '继承所有 Radix UI Progress 的属性' },
+        ]
+      case 'tooltip':
+        return [
+          { prop: 'TooltipProvider', type: 'React.Component', default: '-', description: '工具提示提供者组件（必需）' },
+          { prop: 'TooltipProvider.delayDuration', type: 'number', default: '700', description: '显示延迟时间（毫秒）' },
+          { prop: 'Tooltip', type: 'React.Component', default: '-', description: '工具提示根组件' },
+          { prop: 'TooltipTrigger', type: 'React.Component', default: '-', description: '工具提示触发器' },
+          { prop: 'TooltipTrigger.asChild', type: 'boolean', default: 'false', description: '是否作为子元素渲染' },
+          { prop: 'TooltipContent', type: 'React.Component', default: '-', description: '工具提示内容' },
+          { prop: 'TooltipContent.sideOffset', type: 'number', default: '4', description: '与触发器的偏移距离' },
+          { prop: 'TooltipContent.className', type: 'string', default: 'undefined', description: '额外的 CSS 类名' },
+          { prop: '...props', type: 'TooltipPrimitive props', default: '-', description: '继承所有 Radix UI Tooltip 的属性' },
+        ]
+      case 'textarea':
+        return [
+          { prop: 'className', type: 'string', default: 'undefined', description: '额外的 CSS 类名' },
+          { prop: 'placeholder', type: 'string', default: 'undefined', description: '占位符文本' },
+          { prop: 'disabled', type: 'boolean', default: 'false', description: '是否禁用' },
+          { prop: 'rows', type: 'number', default: 'undefined', description: '行数' },
+          { prop: '...props', type: 'HTMLTextAreaElement props', default: '-', description: '继承所有 textarea 元素的属性' },
+        ]
+      case 'resizable':
+        return [
+          { prop: 'ResizablePanelGroup', type: 'React.Component', default: '-', description: '可调整大小面板组容器' },
+          { prop: 'ResizablePanelGroup.direction', type: '"horizontal" | "vertical"', default: '"horizontal"', description: '面板方向' },
+          { prop: 'ResizablePanel', type: 'React.Component', default: '-', description: '可调整大小的面板' },
+          { prop: 'ResizablePanel.defaultSize', type: 'number', default: 'undefined', description: '默认大小（百分比）' },
+          { prop: 'ResizablePanel.minSize', type: 'number', default: 'undefined', description: '最小大小（百分比）' },
+          { prop: 'ResizablePanel.maxSize', type: 'number', default: 'undefined', description: '最大大小（百分比）' },
+          { prop: 'ResizableHandle', type: 'React.Component', default: '-', description: '调整大小手柄' },
+          { prop: 'ResizableHandle.withHandle', type: 'boolean', default: 'false', description: '是否显示手柄图标' },
+          { prop: '...props', type: 'ResizablePrimitive props', default: '-', description: '继承所有 react-resizable-panels 的属性' },
+        ]
+      case 'table':
+        return [
+          { prop: 'Table', type: 'React.Component', default: '-', description: '表格根组件' },
+          { prop: 'TableHeader', type: 'React.Component', default: '-', description: '表头容器' },
+          { prop: 'TableBody', type: 'React.Component', default: '-', description: '表体容器' },
+          { prop: 'TableFooter', type: 'React.Component', default: '-', description: '表尾容器' },
+          { prop: 'TableRow', type: 'React.Component', default: '-', description: '表格行' },
+          { prop: 'TableHead', type: 'React.Component', default: '-', description: '表头单元格' },
+          { prop: 'TableCell', type: 'React.Component', default: '-', description: '表格单元格' },
+          { prop: 'TableCaption', type: 'React.Component', default: '-', description: '表格标题' },
+          { prop: '...props', type: 'HTMLTableElement props', default: '-', description: '继承所有 table 元素的属性' },
+        ]
+      case 'data-table':
+        return [
+          { prop: 'columns', type: 'ColumnDef<TData, TValue>[]', default: '-', description: '列定义数组（必需）' },
+          { prop: 'data', type: 'TData[]', default: '-', description: '数据数组（必需）' },
+          { prop: '...props', type: 'DataTableProps', default: '-', description: '继承所有 DataTable 的属性' },
+        ]
+      case 'slider':
+        return [
+          { prop: 'value', type: 'number[]', default: 'undefined', description: '滑块的值（数组，支持多值）' },
+          { prop: 'defaultValue', type: 'number[]', default: 'undefined', description: '默认值' },
+          { prop: 'onValueChange', type: '(value: number[]) => void', default: 'undefined', description: '值变化时的回调函数' },
+          { prop: 'min', type: 'number', default: '0', description: '最小值' },
+          { prop: 'max', type: 'number', default: '100', description: '最大值' },
+          { prop: 'step', type: 'number', default: '1', description: '步长' },
+          { prop: 'disabled', type: 'boolean', default: 'false', description: '是否禁用' },
+          { prop: 'className', type: 'string', default: 'undefined', description: '额外的 CSS 类名' },
+          { prop: '...props', type: 'SliderPrimitive props', default: '-', description: '继承所有 Radix UI Slider 的属性' },
+        ]
+      case 'pagination':
+        return [
+          { prop: 'Pagination', type: 'React.Component', default: '-', description: '分页根组件' },
+          { prop: 'PaginationContent', type: 'React.Component', default: '-', description: '分页内容容器' },
+          { prop: 'PaginationItem', type: 'React.Component', default: '-', description: '分页项容器' },
+          { prop: 'PaginationLink', type: 'React.Component', default: '-', description: '分页链接' },
+          { prop: 'PaginationLink.isActive', type: 'boolean', default: 'false', description: '是否为当前页' },
+          { prop: 'PaginationPrevious', type: 'React.Component', default: '-', description: '上一页按钮' },
+          { prop: 'PaginationNext', type: 'React.Component', default: '-', description: '下一页按钮' },
+          { prop: 'PaginationEllipsis', type: 'React.Component', default: '-', description: '省略号组件' },
+          { prop: '...props', type: 'HTMLNavElement props', default: '-', description: '继承所有 nav 元素的属性' },
+        ]
+      case 'item':
+        return [
+          { prop: 'variant', type: '"default" | "destructive" | "outline" | "secondary" | "ghost" | "link"', default: '"default"', description: '变体样式' },
+          { prop: 'size', type: '"default" | "sm" | "lg" | "icon"', default: '"default"', description: '尺寸' },
+          { prop: 'asChild', type: 'boolean', default: 'false', description: '是否作为子元素渲染' },
+          { prop: 'className', type: 'string', default: 'undefined', description: '额外的 CSS 类名' },
+          { prop: '...props', type: 'HTMLButtonElement props', default: '-', description: '继承所有 button 元素的属性' },
+        ]
+      case 'dialog':
+        return [
+          { prop: 'Dialog', type: 'React.Component', default: '-', description: '对话框根组件' },
+          { prop: 'DialogTrigger', type: 'React.Component', default: '-', description: '触发器组件' },
+          { prop: 'DialogTrigger.asChild', type: 'boolean', default: 'false', description: '是否作为子元素渲染' },
+          { prop: 'DialogContent', type: 'React.Component', default: '-', description: '对话框内容' },
+          { prop: 'DialogHeader', type: 'React.Component', default: '-', description: '对话框头部容器' },
+          { prop: 'DialogTitle', type: 'React.Component', default: '-', description: '对话框标题' },
+          { prop: 'DialogDescription', type: 'React.Component', default: '-', description: '对话框描述' },
+          { prop: 'DialogFooter', type: 'React.Component', default: '-', description: '对话框底部容器' },
+          { prop: 'DialogClose', type: 'React.Component', default: '-', description: '关闭按钮' },
+          { prop: '...props', type: 'DialogPrimitive props', default: '-', description: '继承所有 Radix UI Dialog 的属性' },
+        ]
+      case 'sidebar':
+        return [
+          { prop: 'SidebarProvider', type: 'React.Component', default: '-', description: '侧边栏提供者组件（必需）' },
+          { prop: 'SidebarProvider.defaultOpen', type: 'boolean', default: 'true', description: '默认是否展开' },
+          { prop: 'Sidebar', type: 'React.Component', default: '-', description: '侧边栏根组件' },
+          { prop: 'Sidebar.side', type: '"left" | "right"', default: '"left"', description: '侧边栏位置' },
+          { prop: 'Sidebar.variant', type: '"sidebar" | "floating" | "inset"', default: '"sidebar"', description: '侧边栏变体' },
+          { prop: 'Sidebar.collapsible', type: '"offcanvas" | "icon" | "none"', default: '"offcanvas"', description: '折叠方式' },
+          { prop: 'SidebarTrigger', type: 'React.Component', default: '-', description: '侧边栏触发器按钮' },
+          { prop: 'SidebarHeader', type: 'React.Component', default: '-', description: '侧边栏头部' },
+          { prop: 'SidebarContent', type: 'React.Component', default: '-', description: '侧边栏内容' },
+          { prop: 'SidebarFooter', type: 'React.Component', default: '-', description: '侧边栏底部' },
+          { prop: 'SidebarInset', type: 'React.Component', default: '-', description: '侧边栏内容区域' },
+          { prop: 'SidebarGroup', type: 'React.Component', default: '-', description: '侧边栏分组' },
+          { prop: 'SidebarGroupLabel', type: 'React.Component', default: '-', description: '分组标签' },
+          { prop: 'SidebarGroupContent', type: 'React.Component', default: '-', description: '分组内容' },
+          { prop: 'SidebarMenu', type: 'React.Component', default: '-', description: '侧边栏菜单' },
+          { prop: 'SidebarMenuItem', type: 'React.Component', default: '-', description: '菜单项' },
+          { prop: 'SidebarMenuButton', type: 'React.Component', default: '-', description: '菜单按钮' },
+          { prop: 'SidebarMenuButton.isActive', type: 'boolean', default: 'false', description: '是否为活动状态' },
+          { prop: 'SidebarMenuButton.tooltip', type: 'string | TooltipContent props', default: 'undefined', description: '工具提示' },
+          { prop: 'useSidebar', type: 'Hook', default: '-', description: '获取侧边栏状态的 Hook' },
+        ]
+      case 'accordion':
+        return [
+          { prop: 'Accordion', type: 'React.Component', default: '-', description: '手风琴根组件' },
+          { prop: 'Accordion.type', type: '"single" | "multiple"', default: '"single"', description: '手风琴类型（单选或多选）' },
+          { prop: 'AccordionItem', type: 'React.Component', default: '-', description: '手风琴项' },
+          { prop: 'AccordionTrigger', type: 'React.Component', default: '-', description: '手风琴触发器' },
+          { prop: 'AccordionContent', type: 'React.Component', default: '-', description: '手风琴内容' },
+          { prop: '...props', type: 'AccordionPrimitive props', default: '-', description: '继承所有 Radix UI Accordion 的属性' },
+        ]
+      case 'alert-dialog':
+        return [
+          { prop: 'AlertDialog', type: 'React.Component', default: '-', description: '警告对话框根组件' },
+          { prop: 'AlertDialogTrigger', type: 'React.Component', default: '-', description: '触发器组件' },
+          { prop: 'AlertDialogTrigger.asChild', type: 'boolean', default: 'false', description: '是否作为子元素渲染' },
+          { prop: 'AlertDialogContent', type: 'React.Component', default: '-', description: '对话框内容' },
+          { prop: 'AlertDialogHeader', type: 'React.Component', default: '-', description: '对话框头部容器' },
+          { prop: 'AlertDialogTitle', type: 'React.Component', default: '-', description: '对话框标题' },
+          { prop: 'AlertDialogDescription', type: 'React.Component', default: '-', description: '对话框描述' },
+          { prop: 'AlertDialogFooter', type: 'React.Component', default: '-', description: '对话框底部容器' },
+          { prop: 'AlertDialogAction', type: 'React.Component', default: '-', description: '确认按钮' },
+          { prop: 'AlertDialogCancel', type: 'React.Component', default: '-', description: '取消按钮' },
+          { prop: '...props', type: 'AlertDialogPrimitive props', default: '-', description: '继承所有 Radix UI Alert Dialog 的属性' },
+        ]
+      case 'badge':
+        return [
+          { prop: 'variant', type: '"default" | "secondary" | "destructive" | "outline"', default: '"default"', description: '徽章变体样式' },
+          { prop: 'className', type: 'string', default: 'undefined', description: '额外的 CSS 类名' },
+          { prop: '...props', type: 'HTMLDivElement props', default: '-', description: '继承所有 div 元素的属性' },
+        ]
+      case 'calendar':
+        return [
+          { prop: 'mode', type: '"single" | "multiple" | "range"', default: '"single"', description: '选择模式' },
+          { prop: 'selected', type: 'Date | Date[] | { from: Date; to: Date }', default: 'undefined', description: '选中的日期' },
+          { prop: 'onSelect', type: '(date: Date | Date[] | { from: Date; to: Date } | undefined) => void', default: 'undefined', description: '选择日期时的回调函数' },
+          { prop: 'showOutsideDays', type: 'boolean', default: 'true', description: '是否显示外部日期' },
+          { prop: 'className', type: 'string', default: 'undefined', description: '额外的 CSS 类名' },
+          { prop: '...props', type: 'DayPicker props', default: '-', description: '继承所有 react-day-picker 的属性' },
+        ]
+      case 'date-picker':
+        return [
+          { prop: 'date', type: 'Date | undefined', default: 'undefined', description: '选中的日期' },
+          { prop: 'onDateChange', type: '(date: Date | undefined) => void', default: 'undefined', description: '日期变化时的回调函数' },
+          { prop: 'placeholder', type: 'string', default: '"Pick a date"', description: '占位符文本' },
+          { prop: 'disabled', type: 'boolean', default: 'false', description: '是否禁用' },
+          { prop: 'className', type: 'string', default: 'undefined', description: '额外的 CSS 类名' },
+        ]
+      case 'sheet':
+        return [
+          { prop: 'Sheet', type: 'React.Component', default: '-', description: 'Sheet 根组件' },
+          { prop: 'SheetTrigger', type: 'React.Component', default: '-', description: '触发器组件' },
+          { prop: 'SheetTrigger.asChild', type: 'boolean', default: 'false', description: '是否作为子元素渲染' },
+          { prop: 'SheetContent', type: 'React.Component', default: '-', description: 'Sheet 内容' },
+          { prop: 'SheetContent.side', type: '"top" | "right" | "bottom" | "left"', default: '"right"', description: 'Sheet 出现的位置' },
+          { prop: 'SheetHeader', type: 'React.Component', default: '-', description: 'Sheet 头部容器' },
+          { prop: 'SheetTitle', type: 'React.Component', default: '-', description: 'Sheet 标题' },
+          { prop: 'SheetDescription', type: 'React.Component', default: '-', description: 'Sheet 描述' },
+          { prop: 'SheetFooter', type: 'React.Component', default: '-', description: 'Sheet 底部容器' },
+          { prop: 'SheetClose', type: 'React.Component', default: '-', description: '关闭按钮' },
+          { prop: 'SheetClose.asChild', type: 'boolean', default: 'false', description: '是否作为子元素渲染' },
+          { prop: '...props', type: 'DialogPrimitive props', default: '-', description: '继承所有 Radix UI Dialog 的属性' },
+        ]
       default:
         return []
     }
@@ -280,7 +590,7 @@ export default function ComponentPage({ params }: { params: { name: string } }) 
 
   return (
     <div className="flex min-h-screen">
-      <Sidebar />
+      <LayoutSidebar />
       <main className="flex-1 md:ml-64 lg:mr-64">
         <div className="container mx-auto px-4 py-8 max-w-4xl">
           <div className="mb-8">
@@ -304,6 +614,26 @@ export default function ComponentPage({ params }: { params: { name: string } }) 
                 {componentName === 'Sonner' && 'An opinionated toast component for React.'}
                 {componentName === 'Field' && 'A form field component that provides label, description, and error message support.'}
                 {componentName === 'Popover' && 'Displays rich content in a portal, triggered by a button.'}
+                {componentName === 'Breadcrumb' && 'Displays the path to the current resource using a hierarchy of links.'}
+                {componentName === 'Separator' && 'Visually or semantically separates content.'}
+                {componentName === 'Scroll Area' && 'Augments native scroll functionality for custom, cross-browser styling.'}
+                {componentName === 'Progress' && 'Displays an indicator showing the completion progress of a task.'}
+                {componentName === 'Tooltip' && 'A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.'}
+                {componentName === 'Textarea' && 'Displays a form textarea or a component that looks like a textarea.'}
+                {componentName === 'Resizable' && 'Accessible resizable panel groups and layouts with keyboard support.'}
+                {componentName === 'Table' && 'A responsive table component.'}
+                {componentName === 'Data Table' && 'An advanced table component built on top of TanStack Table with sorting, filtering, and pagination.'}
+                {componentName === 'Slider' && 'An input where the user selects a value from within a given range.'}
+                {componentName === 'Pagination' && 'Pagination with page navigation, previous/next buttons, and page numbers.'}
+                {componentName === 'Item' && 'A versatile item component that can be used as a button or as a child element.'}
+                {componentName === 'Dialog' && 'A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.'}
+                {componentName === 'Sidebar' && 'A versatile sidebar component that can be collapsed, expanded, and customized with various menu items and groups.'}
+                {componentName === 'Accordion' && 'A vertically stacked set of interactive headings that each reveal a section of content.'}
+                {componentName === 'Alert Dialog' && 'A modal dialog that interrupts the user with important content and expects a response.'}
+                {componentName === 'Badge' && 'Displays a badge or a component that looks like a badge.'}
+                {componentName === 'Calendar' && 'A date field component that allows users to enter and edit date.'}
+                {componentName === 'Date Picker' && 'A date picker component built on top of Calendar and Popover.'}
+                {componentName === 'Sheet' && 'Extends the Dialog component to display content that complements the main content of the screen.'}
               </p>
           </div>
 
@@ -1297,7 +1627,406 @@ export default function ComponentPage({ params }: { params: { name: string } }) 
                   </div>
                 </div>
               )}
-              {component.name !== 'button' && component.name !== 'input' && component.name !== 'label' && component.name !== 'card' && component.name !== 'checkbox' && component.name !== 'radio-group' && component.name !== 'switch' && component.name !== 'tabs' && component.name !== 'select' && component.name !== 'dropdown-menu' && component.name !== 'combobox' && component.name !== 'context-menu' && component.name !== 'button-group' && component.name !== 'skeleton' && component.name !== 'spinner' && component.name !== 'sonner' && component.name !== 'field' && component.name !== 'popover' && (
+              {component.name === 'breadcrumb' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Basic</h3>
+                    <Breadcrumb>
+                      <BreadcrumbList>
+                        <BreadcrumbItem>
+                          <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                        </BreadcrumbItem>
+                        <BreadcrumbSeparator />
+                        <BreadcrumbItem>
+                          <BreadcrumbLink href="/components">Components</BreadcrumbLink>
+                        </BreadcrumbItem>
+                        <BreadcrumbSeparator />
+                        <BreadcrumbItem>
+                          <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+                        </BreadcrumbItem>
+                      </BreadcrumbList>
+                    </Breadcrumb>
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">With Custom Separator</h3>
+                    <Breadcrumb>
+                      <BreadcrumbList>
+                        <BreadcrumbItem>
+                          <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                        </BreadcrumbItem>
+                        <BreadcrumbSeparator>
+                          <span>/</span>
+                        </BreadcrumbSeparator>
+                        <BreadcrumbItem>
+                          <BreadcrumbLink href="/components">Components</BreadcrumbLink>
+                        </BreadcrumbItem>
+                        <BreadcrumbSeparator>
+                          <span>/</span>
+                        </BreadcrumbSeparator>
+                        <BreadcrumbItem>
+                          <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+                        </BreadcrumbItem>
+                      </BreadcrumbList>
+                    </Breadcrumb>
+                  </div>
+                </div>
+              )}
+              {component.name === 'separator' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Horizontal</h3>
+                    <div>
+                      <div className="space-y-1">
+                        <h4 className="text-sm font-medium leading-none">Radix Primitives</h4>
+                        <p className="text-sm text-muted-foreground">
+                          An open-source UI component library.
+                        </p>
+                      </div>
+                      <Separator className="my-4" />
+                      <div className="flex h-5 items-center space-x-4 text-sm">
+                        <div>Blog</div>
+                        <Separator orientation="vertical" />
+                        <div>Docs</div>
+                        <Separator orientation="vertical" />
+                        <div>Source</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+              {component.name === 'scroll-area' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Basic</h3>
+                    <ScrollArea className="h-72 w-full rounded-md border p-4">
+                      <div className="space-y-2">
+                        {Array.from({ length: 20 }).map((_, i) => (
+                          <div key={i} className="text-sm">
+                            Item {i + 1}
+                          </div>
+                        ))}
+                      </div>
+                    </ScrollArea>
+                  </div>
+                </div>
+              )}
+              {component.name === 'progress' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Basic</h3>
+                    <Progress value={33} />
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Different Values</h3>
+                    <div className="space-y-2">
+                      <Progress value={0} />
+                      <Progress value={25} />
+                      <Progress value={50} />
+                      <Progress value={75} />
+                      <Progress value={100} />
+                    </div>
+                  </div>
+                </div>
+              )}
+              {component.name === 'tooltip' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Basic</h3>
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button variant="basic">Hover me</Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Add to library</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </div>
+                </div>
+              )}
+              {component.name === 'textarea' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Basic</h3>
+                    <Textarea placeholder="Type your message here." />
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Disabled</h3>
+                    <Textarea placeholder="Type your message here." disabled />
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">With Label</h3>
+                    <div className="space-y-2">
+                      <Label htmlFor="message">Your message</Label>
+                      <Textarea placeholder="Type your message here." id="message" />
+                    </div>
+                  </div>
+                </div>
+              )}
+              {component.name === 'resizable' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Horizontal</h3>
+                    <ResizableDemo />
+                  </div>
+                </div>
+              )}
+              {component.name === 'table' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Basic</h3>
+                    <Table>
+                      <TableCaption>A list of your recent invoices.</TableCaption>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="w-[100px]">Invoice</TableHead>
+                          <TableHead>Status</TableHead>
+                          <TableHead>Method</TableHead>
+                          <TableHead className="text-right">Amount</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        <TableRow>
+                          <TableCell className="font-medium">INV001</TableCell>
+                          <TableCell>Paid</TableCell>
+                          <TableCell>Credit Card</TableCell>
+                          <TableCell className="text-right">$250.00</TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell className="font-medium">INV002</TableCell>
+                          <TableCell>Pending</TableCell>
+                          <TableCell>PayPal</TableCell>
+                          <TableCell className="text-right">$150.00</TableCell>
+                        </TableRow>
+                        <TableRow>
+                          <TableCell className="font-medium">INV003</TableCell>
+                          <TableCell>Unpaid</TableCell>
+                          <TableCell>Bank Transfer</TableCell>
+                          <TableCell className="text-right">$350.00</TableCell>
+                        </TableRow>
+                      </TableBody>
+                      <TableFooter>
+                        <TableRow>
+                          <TableCell colSpan={3}>Total</TableCell>
+                          <TableCell className="text-right">$750.00</TableCell>
+                        </TableRow>
+                      </TableFooter>
+                    </Table>
+                  </div>
+                </div>
+              )}
+              {component.name === 'data-table' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Basic</h3>
+                    <DataTableDemo />
+                  </div>
+                </div>
+              )}
+              {component.name === 'slider' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Basic</h3>
+                    <Slider defaultValue={[50]} max={100} step={1} />
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Range</h3>
+                    <Slider defaultValue={[20, 80]} max={100} step={1} />
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Disabled</h3>
+                    <Slider defaultValue={[50]} max={100} step={1} disabled />
+                  </div>
+                </div>
+              )}
+              {component.name === 'pagination' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Basic</h3>
+                    <Pagination>
+                      <PaginationContent>
+                        <PaginationItem>
+                          <PaginationPrevious />
+                        </PaginationItem>
+                        <PaginationItem>
+                          <PaginationLink isActive>1</PaginationLink>
+                        </PaginationItem>
+                        <PaginationItem>
+                          <PaginationLink>2</PaginationLink>
+                        </PaginationItem>
+                        <PaginationItem>
+                          <PaginationLink>3</PaginationLink>
+                        </PaginationItem>
+                        <PaginationItem>
+                          <PaginationEllipsis />
+                        </PaginationItem>
+                        <PaginationItem>
+                          <PaginationNext />
+                        </PaginationItem>
+                      </PaginationContent>
+                    </Pagination>
+                  </div>
+                </div>
+              )}
+              {component.name === 'item' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Variants</h3>
+                    <div className="flex flex-wrap gap-2">
+                      <Item variant="default">Default</Item>
+                      <Item variant="destructive">Destructive</Item>
+                      <Item variant="outline">Outline</Item>
+                      <Item variant="secondary">Secondary</Item>
+                      <Item variant="ghost">Ghost</Item>
+                      <Item variant="link">Link</Item>
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Sizes</h3>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <Item size="sm">Small</Item>
+                      <Item size="default">Default</Item>
+                      <Item size="lg">Large</Item>
+                      <Item size="icon">🚀</Item>
+                    </div>
+                  </div>
+                </div>
+              )}
+              {component.name === 'dialog' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Basic</h3>
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button variant="basic">Open Dialog</Button>
+                      </DialogTrigger>
+                      <DialogContent>
+                        <DialogHeader>
+                          <DialogTitle>Are you absolutely sure?</DialogTitle>
+                          <DialogDescription>
+                            This action cannot be undone. This will permanently delete your
+                            account and remove your data from our servers.
+                          </DialogDescription>
+                        </DialogHeader>
+                        <DialogFooter>
+                          <Button variant="basic">Cancel</Button>
+                          <Button>Continue</Button>
+                        </DialogFooter>
+                      </DialogContent>
+                    </Dialog>
+                  </div>
+                </div>
+              )}
+              {component.name === 'sidebar' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Basic</h3>
+                    <div className="border rounded-lg overflow-hidden" style={{ height: '600px' }}>
+                      <SidebarDemo />
+                    </div>
+                  </div>
+                </div>
+              )}
+              {component.name === 'accordion' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Basic</h3>
+                    <Accordion type="single" collapsible className="w-full">
+                      <AccordionItem value="item-1">
+                        <AccordionTrigger>Is it accessible?</AccordionTrigger>
+                        <AccordionContent>
+                          Yes. It adheres to the WAI-ARIA design pattern.
+                        </AccordionContent>
+                      </AccordionItem>
+                      <AccordionItem value="item-2">
+                        <AccordionTrigger>Is it styled?</AccordionTrigger>
+                        <AccordionContent>
+                          Yes. It comes with default styles that matches the other
+                          components&apos; aesthetic.
+                        </AccordionContent>
+                      </AccordionItem>
+                      <AccordionItem value="item-3">
+                        <AccordionTrigger>Is it animated?</AccordionTrigger>
+                        <AccordionContent>
+                          Yes. It&apos;s animated by default, but you can disable it if you prefer.
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+                  </div>
+                </div>
+              )}
+              {component.name === 'alert-dialog' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Basic</h3>
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button variant="basic">Open Alert Dialog</Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                          <AlertDialogDescription>
+                            This action cannot be undone. This will permanently delete your
+                            account and remove your data from our servers.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+                          <AlertDialogAction>Continue</AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                  </div>
+                </div>
+              )}
+              {component.name === 'badge' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Variants</h3>
+                    <div className="flex flex-wrap gap-2">
+                      <Badge variant="default">Default</Badge>
+                      <Badge variant="secondary">Secondary</Badge>
+                      <Badge variant="destructive">Destructive</Badge>
+                      <Badge variant="outline">Outline</Badge>
+                    </div>
+                  </div>
+                </div>
+              )}
+              {component.name === 'calendar' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Basic</h3>
+                    <CalendarComponent />
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">With Selected Date</h3>
+                    <CalendarComponent mode="single" selected={new Date()} />
+                  </div>
+                </div>
+              )}
+              {component.name === 'date-picker' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Basic</h3>
+                    <DatePickerDemo />
+                  </div>
+                </div>
+              )}
+              {component.name === 'sheet' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Basic</h3>
+                    <SheetDemo />
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Different Sides</h3>
+                    <SheetSidesDemo />
+                  </div>
+                </div>
+              )}
+              {component.name !== 'button' && component.name !== 'input' && component.name !== 'label' && component.name !== 'card' && component.name !== 'checkbox' && component.name !== 'radio-group' && component.name !== 'switch' && component.name !== 'tabs' && component.name !== 'select' && component.name !== 'dropdown-menu' && component.name !== 'combobox' && component.name !== 'context-menu' && component.name !== 'button-group' && component.name !== 'skeleton' && component.name !== 'spinner' && component.name !== 'sonner' && component.name !== 'field' && component.name !== 'popover' && component.name !== 'breadcrumb' && component.name !== 'separator' && component.name !== 'scroll-area' && component.name !== 'progress' && component.name !== 'tooltip' && component.name !== 'textarea' && component.name !== 'resizable' && component.name !== 'table' && component.name !== 'data-table' && component.name !== 'slider' && component.name !== 'pagination' && component.name !== 'item' && component.name !== 'dialog' && component.name !== 'sidebar' && component.name !== 'accordion' && component.name !== 'alert-dialog' && component.name !== 'badge' && component.name !== 'calendar' && component.name !== 'date-picker' && component.name !== 'sheet' && (
                 <p className="text-muted-foreground">组件预览即将添加</p>
               )}
             </div>
@@ -1457,6 +2186,345 @@ import { Button } from "@/components/ui/button"
     </div>
   </PopoverContent>
 </Popover>`
+                  } else if (component.name === 'breadcrumb') {
+                    return `import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
+
+<Breadcrumb>
+  <BreadcrumbList>
+    <BreadcrumbItem>
+      <BreadcrumbLink href="/">Home</BreadcrumbLink>
+    </BreadcrumbItem>
+    <BreadcrumbSeparator />
+    <BreadcrumbItem>
+      <BreadcrumbPage>Current</BreadcrumbPage>
+    </BreadcrumbItem>
+  </BreadcrumbList>
+</Breadcrumb>`
+                  } else if (component.name === 'separator') {
+                    return `import { Separator } from "@/components/ui/separator"
+
+<div>
+  <div>Content above</div>
+  <Separator />
+  <div>Content below</div>
+</div>`
+                  } else if (component.name === 'scroll-area') {
+                    return `import { ScrollArea } from "@/components/ui/scroll-area"
+
+<ScrollArea className="h-72 w-full rounded-md border">
+  <div className="p-4">
+    <h4 className="mb-4 text-sm font-medium">Content</h4>
+    {Array.from({ length: 20 }).map((_, i) => (
+      <div key={i} className="text-sm">Item {i + 1}</div>
+    ))}
+  </div>
+</ScrollArea>`
+                  } else if (component.name === 'progress') {
+                    return `import { Progress } from "@/components/ui/progress"
+
+<Progress value={33} />`
+                  } else if (component.name === 'tooltip') {
+                    return `import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+import { Button } from "@/components/ui/button"
+
+<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button variant="basic">Hover</Button>
+    </TooltipTrigger>
+    <TooltipContent>
+      <p>Add to library</p>
+    </TooltipContent>
+  </Tooltip>
+</TooltipProvider>`
+                  } else if (component.name === 'textarea') {
+                    return `import { Textarea } from "@/components/ui/textarea"
+
+<Textarea placeholder="Type your message here." />`
+                  } else if (component.name === 'resizable') {
+                    return `import {
+  ResizablePanelGroup,
+  ResizablePanel,
+  ResizableHandle,
+} from "@/components/ui/resizable"
+
+<ResizablePanelGroup direction="horizontal">
+  <ResizablePanel defaultSize={50}>One</ResizablePanel>
+  <ResizableHandle />
+  <ResizablePanel defaultSize={50}>Two</ResizablePanel>
+</ResizablePanelGroup>`
+                  } else if (component.name === 'table') {
+                    return `import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Name</TableHead>
+      <TableHead>Status</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>John Doe</TableCell>
+      <TableCell>Active</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>`
+                  } else if (component.name === 'data-table') {
+                    return `import {
+  ColumnDef,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from "@tanstack/react-table"
+import { ArrowUpDown, MoreHorizontal } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { DataTable } from "@/components/ui/data-table"
+
+// Define columns with checkbox and actions
+const columns: ColumnDef<Payment>[] = [
+  {
+    id: "select",
+    header: ({ table }) => (
+      <Checkbox
+        checked={table.getIsAllPageRowsSelected()}
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+      />
+    ),
+  },
+  {
+    accessorKey: "email",
+    header: ({ column }) => (
+      <Button variant="ghost" onClick={() => column.toggleSorting()}>
+        Email
+        <ArrowUpDown className="ml-2 h-4 w-4" />
+      </Button>
+    ),
+  },
+  {
+    id: "actions",
+    cell: ({ row }) => (
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" className="h-8 w-8 p-0">
+            <MoreHorizontal className="h-4 w-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+          <DropdownMenuItem>View details</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    ),
+  },
+]
+
+<DataTable columns={columns} data={data} />`
+                  } else if (component.name === 'slider') {
+                    return `import { Slider } from "@/components/ui/slider"
+
+<Slider defaultValue={[50]} max={100} step={1} />`
+                  } else if (component.name === 'pagination') {
+                    return `import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination"
+
+<Pagination>
+  <PaginationContent>
+    <PaginationItem>
+      <PaginationPrevious href="#" />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationLink href="#">1</PaginationLink>
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationEllipsis />
+    </PaginationItem>
+    <PaginationItem>
+      <PaginationNext href="#" />
+    </PaginationItem>
+  </PaginationContent>
+</Pagination>`
+                  } else if (component.name === 'item') {
+                    return `import { Item } from "@/components/ui/item"
+
+<Item variant="default">Item</Item>`
+                  } else if (component.name === 'dialog') {
+                    return `import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+
+<Dialog>
+  <DialogTrigger>Open</DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Are you sure?</DialogTitle>
+      <DialogDescription>
+        This action cannot be undone.
+      </DialogDescription>
+    </DialogHeader>
+    <DialogFooter>
+      <Button>Cancel</Button>
+      <Button>Continue</Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>`
+                  } else if (component.name === 'sidebar') {
+                    return `import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarInset,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar"
+
+<SidebarProvider>
+  <Sidebar>
+    <SidebarHeader>
+      <div>Header</div>
+    </SidebarHeader>
+    <SidebarContent>
+      <SidebarGroup>
+        <SidebarGroupLabel>Menu</SidebarGroupLabel>
+        <SidebarGroupContent>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton>
+                <span>Home</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
+    </SidebarContent>
+    <SidebarFooter>
+      <SidebarMenu>
+        <SidebarMenuItem>
+          <SidebarMenuButton>
+            <span>Settings</span>
+          </SidebarMenuButton>
+        </SidebarMenuItem>
+      </SidebarMenu>
+    </SidebarFooter>
+  </Sidebar>
+  <SidebarInset>
+    <SidebarTrigger />
+    <div>Main content</div>
+  </SidebarInset>
+</SidebarProvider>`
+                  } else if (component.name === 'accordion') {
+                    return `import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
+
+<Accordion type="single" collapsible>
+  <AccordionItem value="item-1">
+    <AccordionTrigger>Is it accessible?</AccordionTrigger>
+    <AccordionContent>
+      Yes. It adheres to the WAI-ARIA design pattern.
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>`
+                  } else if (component.name === 'alert-dialog') {
+                    return `import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+
+<AlertDialog>
+  <AlertDialogTrigger>Open</AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+      <AlertDialogDescription>
+        This action cannot be undone.
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel>Cancel</AlertDialogCancel>
+      <AlertDialogAction>Continue</AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>`
+                  } else if (component.name === 'badge') {
+                    return `import { Badge } from "@/components/ui/badge"
+
+<Badge variant="default">Badge</Badge>`
+                  } else if (component.name === 'calendar') {
+                    return `import { Calendar } from "@/components/ui/calendar"
+
+<Calendar mode="single" selected={new Date()} />`
+                  } else if (component.name === 'date-picker') {
+                    return `import { DatePicker } from "@/components/ui/date-picker"
+
+<DatePicker date={date} onDateChange={setDate} />`
                   } else {
                     return `import { ${componentName} } from "@/components/ui/${component.name}"
 

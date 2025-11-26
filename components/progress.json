@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "name": "progress",
+  "type": "component",
+  "files": [
+    {
+      "path": "templates/component/progress.tsx",
+      "type": "component",
+      "target": "components/ui/progress.tsx"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-progress"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}
+

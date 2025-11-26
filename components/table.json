@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "name": "table",
+  "type": "component",
+  "files": [
+    {
+      "path": "templates/component/table.tsx",
+      "type": "component",
+      "target": "components/ui/table.tsx"
+    }
+  ],
+  "dependencies": [],
+  "registryDependencies": [
+    "utils"
+  ]
+}
+

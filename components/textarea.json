@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "name": "textarea",
+  "type": "component",
+  "files": [
+    {
+      "path": "templates/component/textarea.tsx",
+      "type": "component",
+      "target": "components/ui/textarea.tsx"
+    }
+  ],
+  "dependencies": [],
+  "registryDependencies": [
+    "utils"
+  ]
+}
+

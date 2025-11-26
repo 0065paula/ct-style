@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "name": "slider",
+  "type": "component",
+  "files": [
+    {
+      "path": "templates/component/slider.tsx",
+      "type": "component",
+      "target": "components/ui/slider.tsx"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-slider"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}
+

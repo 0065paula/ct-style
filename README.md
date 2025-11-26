@@ -139,15 +139,19 @@ npx shadcn@latest add button --registry file:///path/to/this/registry
 
 ## 📚 Documentation
 
-Complete component documentation is available in the `docs/` directory:
+Complete component documentation is available in the `apps/docs/` directory. To view the documentation:
 
-- [Button Documentation](./docs/button.md)
-- [Input Documentation](./docs/input.md)
-- [Card Documentation](./docs/card.md)
-- [Label Documentation](./docs/label.md)
-- [Utils Documentation](./docs/utils.md)
+```bash
+npm run docs:dev
+```
 
-View all documentation: [docs/README.md](./docs/README.md)
+Then open [http://localhost:3000](http://localhost:3000) in your browser.
+
+The documentation site includes:
+- Interactive component previews
+- API reference tables
+- Code examples
+- Full component documentation
 
 ## 📄 License
 

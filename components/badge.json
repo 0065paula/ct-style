@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "name": "badge",
+  "type": "component",
+  "files": [
+    {
+      "path": "templates/component/badge.tsx",
+      "type": "component",
+      "target": "components/ui/badge.tsx"
+    }
+  ],
+  "dependencies": [],
+  "registryDependencies": [
+    "utils"
+  ]
+}
+

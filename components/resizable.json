@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "name": "resizable",
+  "type": "component",
+  "files": [
+    {
+      "path": "templates/component/resizable.tsx",
+      "type": "component",
+      "target": "components/ui/resizable.tsx"
+    }
+  ],
+  "dependencies": [
+    "react-resizable-panels"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}
+

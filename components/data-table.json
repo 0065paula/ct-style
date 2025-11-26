@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "name": "data-table",
+  "type": "component",
+  "files": [
+    {
+      "path": "templates/component/data-table.tsx",
+      "type": "component",
+      "target": "components/ui/data-table.tsx"
+    }
+  ],
+  "dependencies": [
+    "@tanstack/react-table"
+  ],
+  "registryDependencies": [
+    "utils",
+    "table",
+    "button",
+    "dropdown-menu",
+    "input"
+  ]
+}
+

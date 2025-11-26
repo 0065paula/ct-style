@@ -108,10 +108,20 @@
     --switch-bg-checked-hover: #008F4C;
     --switch-bg-checked-disabled: #00BA5D;
     --switch-thumb: #FFFFFF;
-    --switch-thumb-shadow-sm: 0px 1px 8px 0px rgba(0, 0, 0, 0.2);
-    --switch-thumb-shadow-md: 0px 2px 12px 0px rgba(0, 0, 0, 0.2);
-    --switch-thumb-shadow-lg: 0px 3px 16px 0px rgba(0, 0, 0, 0.2);
-  }
+        --switch-thumb-shadow-sm: 0px 1px 8px 0px rgba(0, 0, 0, 0.2);
+        --switch-thumb-shadow-md: 0px 2px 12px 0px rgba(0, 0, 0, 0.2);
+        --switch-thumb-shadow-lg: 0px 3px 16px 0px rgba(0, 0, 0, 0.2);
+
+        /* Sidebar Colors */
+        --sidebar-background: #1A1F35;
+        --sidebar-foreground: #F8FAFC;
+        --sidebar-primary: #0A0E27;
+        --sidebar-primary-foreground: #FFFFFF;
+        --sidebar-accent: rgba(255, 255, 255, 0.1);
+        --sidebar-accent-foreground: #F8FAFC;
+        --sidebar-border: rgba(255, 255, 255, 0.1);
+        --sidebar-ring: #0080FF;
+      }
 
   .dark {
     --background: #0A0E27;

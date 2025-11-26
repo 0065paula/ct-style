@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "name": "accordion",
+  "type": "component",
+  "files": [
+    {
+      "path": "templates/component/accordion.tsx",
+      "type": "component",
+      "target": "components/ui/accordion.tsx"
+    }
+  ],
+  "dependencies": [
+    "@radix-ui/react-accordion"
+  ],
+  "registryDependencies": [
+    "utils"
+  ]
+}
+

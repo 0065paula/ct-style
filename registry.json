@@ -100,6 +100,106 @@
       "path": "components/field.json"
     },
     {
+      "name": "breadcrumb",
+      "type": "component",
+      "path": "components/breadcrumb.json"
+    },
+    {
+      "name": "separator",
+      "type": "component",
+      "path": "components/separator.json"
+    },
+    {
+      "name": "scroll-area",
+      "type": "component",
+      "path": "components/scroll-area.json"
+    },
+    {
+      "name": "progress",
+      "type": "component",
+      "path": "components/progress.json"
+    },
+    {
+      "name": "tooltip",
+      "type": "component",
+      "path": "components/tooltip.json"
+    },
+    {
+      "name": "textarea",
+      "type": "component",
+      "path": "components/textarea.json"
+    },
+    {
+      "name": "resizable",
+      "type": "component",
+      "path": "components/resizable.json"
+    },
+    {
+      "name": "table",
+      "type": "component",
+      "path": "components/table.json"
+    },
+    {
+      "name": "data-table",
+      "type": "component",
+      "path": "components/data-table.json"
+    },
+    {
+      "name": "slider",
+      "type": "component",
+      "path": "components/slider.json"
+    },
+    {
+      "name": "pagination",
+      "type": "component",
+      "path": "components/pagination.json"
+    },
+    {
+      "name": "item",
+      "type": "component",
+      "path": "components/item.json"
+    },
+    {
+      "name": "dialog",
+      "type": "component",
+      "path": "components/dialog.json"
+    },
+    {
+      "name": "sheet",
+      "type": "component",
+      "path": "components/sheet.json"
+    },
+    {
+      "name": "sidebar",
+      "type": "component",
+      "path": "components/sidebar.json"
+    },
+    {
+      "name": "accordion",
+      "type": "component",
+      "path": "components/accordion.json"
+    },
+    {
+      "name": "alert-dialog",
+      "type": "component",
+      "path": "components/alert-dialog.json"
+    },
+    {
+      "name": "badge",
+      "type": "component",
+      "path": "components/badge.json"
+    },
+    {
+      "name": "calendar",
+      "type": "component",
+      "path": "components/calendar.json"
+    },
+    {
+      "name": "date-picker",
+      "type": "component",
+      "path": "components/date-picker.json"
+    },
+    {
       "name": "utils",
       "type": "lib",
       "path": "components/utils.json"
