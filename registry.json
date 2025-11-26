@@ -1,8 +1,9 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "internal-light-ui",
+  "homepage": "http://gitlab.smartx.com/product-design/internal-tool-ui",
   "description": "Internal lightweight UI registry for company tools",
-  "author": "Company Frontend Team",
+  "author": "Paula Meng",
   "items": [
     {
       "name": "button",
