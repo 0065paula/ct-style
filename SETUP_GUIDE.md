@@ -23,16 +23,19 @@ git push -u origin main
 
 #### 2. 获取 Registry URL
 
-- **GitHub/GitLab Raw URL**:
+- **内部 GitLab**（当前使用）:
   ```
-  https://raw.githubusercontent.com/your-org/ct-style/main
-  # 或
-  https://gitlab.com/your-org/ct-style/-/raw/main
+  http://gitlab.smartx.com/product-design/internal-tool-ui/-/raw/main
   ```
 
-- **使用 Git 协议**（如果支持）:
+- **其他 GitLab Raw URL**:
   ```
-  https://your-git-server.com/your-org/ct-style.git
+  https://gitlab.com/your-org/internal-tool-ui/-/raw/main
+  ```
+
+- **GitHub Raw URL**:
+  ```
+  https://raw.githubusercontent.com/your-org/internal-tool-ui/main
   ```
 
 #### 3. 团队使用
@@ -41,10 +44,10 @@ git push -u origin main
 
 ```bash
 # 添加组件
-npx shadcn@latest add button --registry https://raw.githubusercontent.com/your-org/ct-style/main
+npx shadcn@latest add button --registry http://gitlab.smartx.com/product-design/internal-tool-ui/-/raw/main
 
 # 或添加到项目的 components.json
-npx shadcn@latest init --registry https://raw.githubusercontent.com/your-org/ct-style/main
+npx shadcn@latest init --registry http://gitlab.smartx.com/product-design/internal-tool-ui/-/raw/main
 ```
 
 ---
@@ -82,10 +85,10 @@ npx shadcn@latest add button --registry https://your-server.com/registry
 
 ```bash
 # 使用绝对路径
-npx shadcn@latest add button --registry file:///absolute/path/to/ct-style
+npx shadcn@latest add button --registry file:///absolute/path/to/internal-tool-ui
 
 # 或相对路径（从项目根目录）
-npx shadcn@latest add button --registry file://./path/to/ct-style
+npx shadcn@latest add button --registry file://./path/to/internal-tool-ui
 ```
 
 ---
@@ -101,8 +104,8 @@ npx shadcn@latest add button --registry file://./path/to/ct-style
 npx shadcn@latest init
 
 # 当提示选择 registry 时，输入：
-https://raw.githubusercontent.com/your-org/ct-style/main
-# 或你的 registry URL
+http://gitlab.smartx.com/product-design/internal-tool-ui/-/raw/main
+```
 ```
 
 ### 2. 添加组件
@@ -115,7 +118,7 @@ npx shadcn@latest add button
 npx shadcn@latest add button input card
 
 # 查看所有可用组件
-npx shadcn@latest list --registry https://raw.githubusercontent.com/your-org/ct-style/main
+npx shadcn@latest list --registry http://gitlab.smartx.com/product-design/internal-tool-ui/-/raw/main
 ```
 
 ### 3. 配置项目
@@ -126,7 +129,7 @@ npx shadcn@latest list --registry https://raw.githubusercontent.com/your-org/ct-
 
 ```bash
 # 复制主题文件
-cp -r /path/to/ct-style/theme ./theme
+cp -r /path/to/internal-tool-ui/theme ./theme
 
 # 或手动下载
 # 1. 复制 theme/tokens.css 到你的项目
@@ -177,7 +180,7 @@ export default {
     "components": "@/components",
     "utils": "@/lib/utils"
   },
-  "registry": "https://raw.githubusercontent.com/your-org/ct-style/main"
+  "registry": "http://gitlab.smartx.com/product-design/internal-tool-ui/-/raw/main"
 }
 ```
 

@@ -1,9 +1,9 @@
 {
-  "name": "internal-light-ui-registry",
+  "name": "internal-tool-ui-registry",
   "version": "0.1.0",
-  "description": "Internal lightweight UI registry for company tools",
+  "description": "Internal lightweight UI registry for company tools based on shadcn/ui",
   "type": "module",
-  "author": "Company Frontend Team",
+  "author": "Paula Meng",
   "license": "MIT",
   "scripts": {
     "build": "tsx scripts/build.ts",

@@ -7,10 +7,11 @@
 本项目是一个适用于 shadcn/ui CLI 的 **Registry Provider**，提供：
 
 - 一致的组件结构
-- 已定制的样式（Button / Input / Card / Label 等基础组件）
+- 已定制的样式（Button、Input、Card、Label、Checkbox、Radio、Switch、Tabs、Select、Dialog 等 40+ 组件）
 - 统一的 Tailwind preset / CSS variables
 - 公司默认主题（baseColor、风格、Spacing、Radius、Brand Color）
 - 一套能被 `shadcn@latest add {component}` 拉取的模板
+- 完整的组件文档站点（包含交互式预览和 API 参考）
 
 所有组件均为可读的 TSX 源码，符合 shadcn/ui 风格，可被应用项目自由修改。
 
@@ -19,17 +20,19 @@
 ```
 internal-registry/
 ├── registry.json              # Registry 主配置文件
-├── components/                # 组件定义文件
+├── components/                # 组件定义文件（40+ 个组件）
 │   ├── button.json
 │   ├── input.json
 │   ├── card.json
-│   └── label.json
+│   ├── label.json
+│   └── ...（更多组件）
 ├── templates/                 # 组件模板源码
-│   ├── component/
+│   ├── component/            # 组件源码（40+ 个组件）
 │   │   ├── button.tsx
 │   │   ├── input.tsx
 │   │   ├── card.tsx
-│   │   └── label.tsx
+│   │   ├── label.tsx
+│   │   └── ...（更多组件）
 │   └── utils/
 │       └── cn.ts
 ├── theme/                     # 主题配置
@@ -37,7 +40,11 @@ internal-registry/
 │   ├── preset.js             # Tailwind preset
 │   └── globals.css           # 全局样式
 ├── scripts/
-│   └── build.ts              # 构建和验证脚本
+│   ├── build.ts              # 构建和验证脚本
+│   ├── validate-json.js     # JSON 验证脚本
+│   └── serve-registry.js    # 本地 HTTP 服务器
+├── apps/
+│   └── docs/                # 组件文档站点（Next.js）
 └── package.json
 ```
 
@@ -74,15 +81,15 @@ npm run build
 1. **将 registry 推送到 Git 仓库**（GitHub、GitLab 等）
 
 2. **获取 Registry URL**:
-   - GitHub: `https://raw.githubusercontent.com/your-org/ct-style/main`
-   - GitLab: `https://gitlab.com/your-org/ct-style/-/raw/main`
-   - 或你的内部 Git 服务器 raw URL
+   - **内部 GitLab**（当前使用）: `http://gitlab.smartx.com/product-design/internal-tool-ui/-/raw/main`
+   - GitHub: `https://raw.githubusercontent.com/your-org/internal-tool-ui/main`
+   - 其他 GitLab: `https://gitlab.com/your-org/internal-tool-ui/-/raw/main`
 
 3. **在项目中使用**:
 
 ```bash
 # 初始化项目（首次使用）
-npx shadcn@latest init --registry https://raw.githubusercontent.com/your-org/ct-style/main
+npx shadcn@latest init --registry http://gitlab.smartx.com/product-design/internal-tool-ui/-/raw/main
 
 # 添加组件
 npx shadcn@latest add button
@@ -108,13 +115,14 @@ npx shadcn@latest add button --registry http://localhost:3002
 ### 方式三：本地文件系统
 
 ```bash
-npx shadcn@latest add button --registry file:///absolute/path/to/ct-style
+npx shadcn@latest add button --registry file:///absolute/path/to/internal-tool-ui
 ```
 
 ### 查看可用组件
 
 ```bash
-npx shadcn@latest list --registry <your-registry-url>
+# 使用内部 GitLab registry
+npx shadcn@latest list --registry http://gitlab.smartx.com/product-design/internal-tool-ui/-/raw/main
 ```
 
 > 📖 详细部署指南请查看 [SETUP_GUIDE.md](./SETUP_GUIDE.md)
@@ -154,12 +162,30 @@ npx shadcn@latest list --registry <your-registry-url>
 3. 在 `registry.json` 的 `items` 数组中添加新组件引用
 4. 运行 `pnpm run validate` 验证
 
+## 📦 组件依赖
+
+本 registry 中的组件需要以下依赖项。当使用 `shadcn add` 命令添加组件时，这些依赖会自动安装。
+
+### 核心依赖（所有组件都需要）
+- `clsx` - 用于条件类名组合
+- `tailwind-merge` - 用于合并 Tailwind 类名，避免冲突
+
+### 组件特定依赖
+- `class-variance-authority` - 用于 variant 和 size 变体管理（Button、Label 等）
+- `@radix-ui/react-slot` - 用于 asChild 属性支持（Button 等）
+- `@radix-ui/react-label` - 可访问的 label 组件（Label）
+- `@radix-ui/react-*` - 其他 Radix UI 组件（根据具体组件而定）
+- `lucide-react` - 图标库（部分组件使用）
+
+> **注意**：`shadcn add` 命令会自动安装组件所需的依赖，通常不需要手动安装。
+
 ## 🔧 技术栈
 
 - Node.js + TypeScript
 - Tailwind CSS v4
 - ESM 模块
 - shadcn/ui registry 规范
+- React 19（兼容 React 18）
 
 ## ✅ 完成标准
 
