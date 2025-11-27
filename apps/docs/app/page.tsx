@@ -5,12 +5,14 @@ import registry from '../../../registry.json'
 interface Component {
   name: string
   type: string
-  path: string
+  title?: string
+  description?: string
+  files?: Array<{ path: string; type: string }>
 }
 
 export default function HomePage() {
   const components = registry.items.filter(
-    (item: Component) => item.type === 'component' && item.name !== 'utils'
+    (item: Component) => (item.type === 'registry:component' || item.type === 'component') && item.name !== 'utils'
   )
 
   return (

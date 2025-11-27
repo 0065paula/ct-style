@@ -19,30 +19,36 @@
 
 ```
 internal-registry/
-├── registry.json              # Registry 主配置文件
-├── components/                # 组件定义文件（40+ 个组件）
+├── registry.json              # Registry 主配置文件（官方格式）
+├── registry/                 # 组件源码目录（官方结构）
+│   └── default/             # 默认风格
+│       ├── button/
+│       │   └── button.tsx
+│       ├── input/
+│       │   └── input.tsx
+│       ├── utils/
+│       │   └── utils.ts
+│       └── ...（40+ 组件）
+├── public/                   # 构建输出目录
+│   └── r/                   # shadcn build 输出（JSON 文件）
+├── components/               # 组件定义文件（保留，用于参考）
 │   ├── button.json
 │   ├── input.json
-│   ├── card.json
-│   ├── label.json
 │   └── ...（更多组件）
-├── templates/                 # 组件模板源码
-│   ├── component/            # 组件源码（40+ 个组件）
-│   │   ├── button.tsx
-│   │   ├── input.tsx
-│   │   ├── card.tsx
-│   │   ├── label.tsx
-│   │   └── ...（更多组件）
+├── templates/                # 旧版组件模板（保留，用于参考）
+│   ├── component/
 │   └── utils/
-│       └── cn.ts
-├── theme/                     # 主题配置
-│   ├── tokens.css            # 设计 tokens（CSS 变量）
-│   ├── preset.js             # Tailwind preset
-│   └── globals.css           # 全局样式
+├── theme/                    # 主题配置
+│   ├── tokens.css           # 设计 tokens（CSS 变量）
+│   ├── preset.js            # Tailwind preset
+│   └── globals.css          # 全局样式
 ├── scripts/
-│   ├── build.ts              # 构建和验证脚本
-│   ├── validate-json.js     # JSON 验证脚本
-│   └── serve-registry.js    # 本地 HTTP 服务器
+│   ├── build.ts             # 构建和验证脚本
+│   ├── validate-json.js    # JSON 验证脚本
+│   ├── serve-registry.js    # 本地 HTTP 服务器
+│   ├── migrate-registry-format.ts      # 格式迁移脚本
+│   ├── migrate-to-official-structure.ts # 目录结构迁移脚本
+│   └── add-component.js     # CLI 3.5.0 包装脚本
 ├── apps/
 │   └── docs/                # 组件文档站点（Next.js）
 └── package.json
@@ -53,167 +59,289 @@ internal-registry/
 ### 安装依赖
 
 ```bash
-pnpm install
-# 或
 npm install
+# 或
+pnpm install
 ```
 
 ### 验证 Registry
 
 ```bash
-pnpm run validate
-# 或
 npm run validate
 ```
 
 ### 构建 Registry
 
+使用官方 `shadcn build` 命令：
+
 ```bash
-pnpm run build
-# 或
-npm run build
+npm run registry:build
 ```
 
-## 📦 使用方式
+这将生成 `public/r/[NAME].json` 文件，可以通过 HTTP 服务器访问。
 
-### 方式一：Git 仓库托管（推荐）
-
-1. **将 registry 推送到 Git 仓库**（GitHub、GitLab 等）
-
-2. **获取 Registry URL**:
-   - **内部 GitLab**（当前使用）: `http://gitlab.smartx.com/product-design/internal-tool-ui/-/raw/main`
-   - GitHub: `https://raw.githubusercontent.com/your-org/internal-tool-ui/main`
-   - 其他 GitLab: `https://gitlab.com/your-org/internal-tool-ui/-/raw/main`
-
-3. **在项目中使用**:
+### 本地开发服务器
 
 ```bash
-# 初始化项目（首次使用）
-npx shadcn@latest init --registry http://gitlab.smartx.com/product-design/internal-tool-ui/-/raw/main
-
-# 添加组件
-npx shadcn@latest add button
-npx shadcn@latest add input card label
-```
-
-### 方式二：本地 HTTP 服务器（开发测试）
-
-启动本地服务器：
-
-```bash
-npm run serve
-# 或指定端口
+# 启动本地 HTTP 服务器（端口 3002）
 npm run serve:registry
+
+# 或使用自定义端口
+npm run serve
 ```
 
-然后在项目中使用：
+### 文档站点
 
 ```bash
-npx shadcn@latest add button --registry http://localhost:3002
-```
-
-### 方式三：本地文件系统
-
-```bash
-npx shadcn@latest add button --registry file:///absolute/path/to/internal-tool-ui
-```
-
-### 查看可用组件
-
-```bash
-# 使用内部 GitLab registry
-npx shadcn@latest list --registry http://gitlab.smartx.com/product-design/internal-tool-ui/-/raw/main
-```
-
-> 📖 详细部署指南请查看 [SETUP_GUIDE.md](./SETUP_GUIDE.md)
-
-## 🎨 主题定制
-
-### 修改品牌色
-
-编辑 `theme/tokens.css` 中的 `--brand` 变量：
-
-```css
-:root {
-  --brand: 222 70% 50%; /* 修改为你公司的品牌色 */
-}
-```
-
-### 修改圆角
-
-编辑 `theme/tokens.css` 中的 `--radius` 变量：
-
-```css
-:root {
-  --radius: 0.5rem; /* 修改为你需要的圆角大小 */
-}
-```
-
-### 在项目中使用主题
-
-1. 复制 `theme/tokens.css` 到你的项目
-2. 在 `tailwind.config.js` 中引入 `theme/preset.js`
-3. 在全局 CSS 中引入 `theme/globals.css`
-
-## 📝 添加新组件
-
-1. 在 `components/` 目录下创建新的 JSON 文件（如 `dialog.json`）
-2. 在 `templates/component/` 目录下创建对应的 TSX 文件
-3. 在 `registry.json` 的 `items` 数组中添加新组件引用
-4. 运行 `pnpm run validate` 验证
-
-## 📦 组件依赖
-
-本 registry 中的组件需要以下依赖项。当使用 `shadcn add` 命令添加组件时，这些依赖会自动安装。
-
-### 核心依赖（所有组件都需要）
-- `clsx` - 用于条件类名组合
-- `tailwind-merge` - 用于合并 Tailwind 类名，避免冲突
-
-### 组件特定依赖
-- `class-variance-authority` - 用于 variant 和 size 变体管理（Button、Label 等）
-- `@radix-ui/react-slot` - 用于 asChild 属性支持（Button 等）
-- `@radix-ui/react-label` - 可访问的 label 组件（Label）
-- `@radix-ui/react-*` - 其他 Radix UI 组件（根据具体组件而定）
-- `lucide-react` - 图标库（部分组件使用）
-
-> **注意**：`shadcn add` 命令会自动安装组件所需的依赖，通常不需要手动安装。
-
-## 🔧 技术栈
-
-- Node.js + TypeScript
-- Tailwind CSS v4
-- ESM 模块
-- shadcn/ui registry 规范
-- React 19（兼容 React 18）
-
-## ✅ 完成标准
-
-- ✅ registry 项目可正常通过 HTTP 或本地路径使用
-- ✅ `shadcn add button` 能从 registry 拉取成功
-- ✅ 组件可在 Next.js 项目中正常编译
-- ✅ Tailwind preset 正确注入样式
-- ✅ 所有组件均具备可读性、可修改性
-- ✅ `registry.json` 校验通过官方 schema
-- ✅ 能扩展更多组件而不破坏结构
-
-## 📚 Documentation
-
-Complete component documentation is available in the `apps/docs/` directory. To view the documentation:
-
-```bash
+# 启动文档站点开发服务器
 npm run docs:dev
+
+# 构建文档站点
+npm run docs:build
 ```
 
-Then open [http://localhost:3000](http://localhost:3000) in your browser.
+访问 `http://localhost:3000` 查看组件文档。
 
-The documentation site includes:
-- Interactive component previews
-- API reference tables
-- Code examples
-- Full component documentation
+## 📦 使用方式（内部项目）
 
-## 📄 License
+### Registry URL
 
-MIT
+**当前分支（registry-format）**：
+```
+https://raw.githubusercontent.com/0065paula/ct-style/registry-format
+```
 
+**主分支（main）**：
+```
+https://raw.githubusercontent.com/0065paula/ct-style/main
+```
+
+### 在项目中使用
+
+#### 方式一：使用新版 shadcn CLI（推荐）
+
+1. **初始化项目**：
+   ```bash
+   npx shadcn@latest init
+   ```
+
+2. **配置 components.json**：
+   ```json
+   {
+     "$schema": "https://ui.shadcn.com/schema.json",
+     "style": "default",
+     "rsc": true,
+     "tsx": true,
+     "registry": "https://raw.githubusercontent.com/0065paula/ct-style/registry-format",
+     "tailwind": {
+       "config": "tailwind.config.ts",
+       "css": "src/app/globals.css",
+       "baseColor": "slate",
+       "cssVariables": true,
+       "prefix": ""
+     },
+     "aliases": {
+       "components": "@/components",
+       "utils": "@/lib/utils",
+       "ui": "@/components/ui",
+       "lib": "@/lib"
+     }
+   }
+   ```
+
+3. **添加组件**：
+   ```bash
+   npx shadcn@latest add button
+   npx shadcn@latest add input card label checkbox
+   ```
+
+#### 方式二：使用包装脚本（CLI 3.5.0）
+
+如果使用旧版 shadcn CLI (3.5.0)：
+
+1. **下载包装脚本**：
+   ```bash
+   mkdir -p scripts
+   curl https://raw.githubusercontent.com/0065paula/ct-style/registry-format/scripts/add-component.js -o scripts/add-component.js
+   chmod +x scripts/add-component.js
+   ```
+
+2. **修改脚本中的 Registry URL**：
+   编辑 `scripts/add-component.js`，设置：
+   ```javascript
+   const REGISTRY_URL = 'https://raw.githubusercontent.com/0065paula/ct-style/registry-format';
+   ```
+
+3. **添加 npm script**：
+   ```json
+   {
+     "scripts": {
+       "add:component": "node scripts/add-component.js"
+     }
+   }
+   ```
+
+4. **添加组件**：
+   ```bash
+   npm run add:component button
+   ```
+
+### 配置主题（可选）
+
+如果需要使用 CloudTower UI 主题：
+
+1. **下载主题文件**：
+   ```bash
+   mkdir -p theme
+   curl https://raw.githubusercontent.com/0065paula/ct-style/registry-format/theme/tokens.css -o theme/tokens.css
+   curl https://raw.githubusercontent.com/0065paula/ct-style/registry-format/theme/preset.js -o theme/preset.js
+   curl https://raw.githubusercontent.com/0065paula/ct-style/registry-format/theme/globals.css -o theme/globals.css
+   ```
+
+2. **配置 Tailwind**：
+   在 `tailwind.config.ts` 中：
+   ```typescript
+   import preset from './theme/preset.js'
+   
+   export default {
+     presets: [preset],
+     // ... 其他配置
+   }
+   ```
+
+3. **引入全局样式**：
+   在 `globals.css` 中：
+   ```css
+   @import './theme/tokens.css';
+   @import './theme/globals.css';
+   ```
+
+## 🔧 开发指南
+
+### 添加新组件
+
+1. **创建组件文件**：
+   ```bash
+   # 在 registry/default/[component-name]/ 目录下创建
+   mkdir -p registry/default/my-component
+   # 创建组件文件
+   touch registry/default/my-component/my-component.tsx
+   ```
+
+2. **更新 registry.json**：
+   在 `registry.json` 的 `items` 数组中添加：
+   ```json
+   {
+     "name": "my-component",
+     "type": "registry:component",
+     "title": "My Component",
+     "description": "A custom component.",
+     "files": [
+       {
+         "path": "registry/default/my-component/my-component.tsx",
+         "type": "registry:component",
+         "target": "components/ui/my-component.tsx"
+       }
+     ],
+     "dependencies": ["@radix-ui/react-..."],
+     "registryDependencies": ["utils"]
+   }
+   ```
+
+3. **验证**：
+   ```bash
+   npm run validate
+   ```
+
+### 更新组件
+
+1. 修改 `registry/default/[name]/[name].tsx` 文件
+2. 运行验证：`npm run validate`
+3. 提交并推送到 Git
+4. 团队项目使用 `--overwrite` 重新添加组件
+
+### 构建和部署
+
+1. **构建 registry**：
+   ```bash
+   npm run registry:build
+   ```
+
+2. **部署 public/r/ 目录**：
+   将 `public/r/` 目录部署到可访问的 URL
+
+3. **使用构建后的 URL**：
+   ```json
+   {
+     "registry": "https://your-deployment-url/r"
+   }
+   ```
+
+## 📚 可用组件
+
+当前 registry 包含 40+ 个组件：
+
+**表单组件**：Button, Input, Textarea, Select, Checkbox, Radio Group, Switch, Label, Field
+
+**布局组件**：Card, Separator, Scroll Area, Resizable, Sidebar
+
+**导航组件**：Tabs, Breadcrumb, Pagination, Sidebar
+
+**反馈组件**：Dialog, Alert Dialog, Sheet, Popover, Tooltip, Sonner, Progress, Skeleton, Spinner
+
+**数据展示**：Table, Data Table, Calendar, Date Picker, Badge
+
+**其他组件**：Accordion, Command, Combobox, Context Menu, Dropdown Menu, Item
+
+**工具**：Utils (cn function)
+
+完整列表请查看 `registry.json` 或访问文档站点。
+
+## 🔗 相关资源
+
+- [shadcn/ui 官方文档](https://ui.shadcn.com)
+- [Registry 规范](https://ui.shadcn.com/docs/registry/getting-started)
+- [Registry JSON Schema](https://ui.shadcn.com/docs/registry/registry-json)
+- [Registry Item Schema](https://ui.shadcn.com/docs/registry/registry-item.json)
+- [使用指南](./USAGE_GUIDE.md) - 详细的使用步骤和故障排查
+
+## 📝 项目信息
+
+- **仓库地址**：`git@github.com:0065paula/ct-style.git`
+- **当前分支**：`registry-format`（官方格式）
+- **主分支**：`main`（传统格式）
+- **Registry URL**：`https://raw.githubusercontent.com/0065paula/ct-style/registry-format`
+
+## ⚠️ 注意事项
+
+1. **分支选择**：
+   - `registry-format` 分支：使用官方格式，符合最新规范
+   - `main` 分支：使用传统格式，兼容旧版 CLI
+
+2. **CLI 版本**：
+   - 新版 CLI：支持 `components.json` 中的 `registry` 字段
+   - 旧版 CLI (3.5.0)：需要使用包装脚本
+
+3. **网络访问**：
+   - 确保可以访问 GitHub（如果使用 GitHub Raw URL）
+   - 或使用内部 GitLab（如果已配置）
+
+## 🆘 故障排查
+
+### 组件列表不显示
+
+检查文档站点的过滤条件是否支持 `registry:component` 类型。
+
+### 组件安装失败
+
+- 检查 Registry URL 是否正确
+- 验证网络连接
+- 查看 CLI 版本
+- 尝试使用包装脚本
+
+### 导入路径错误
+
+- 检查 `components.json` 中的 `aliases` 配置
+- 确保路径别名正确
+
+更多故障排查请参考 [USAGE_GUIDE.md](./USAGE_GUIDE.md)。
