@@ -139,18 +139,20 @@ const TableOfContents = dynamic(() => import('../../../components/layout/toc').t
 interface Component {
   name: string
   type: string
-  path: string
+  title?: string
+  description?: string
+  files?: Array<{ path: string; type: string }>
 }
 
 function getComponent(name: string): Component | undefined {
   return registry.items.find(
-    (item: Component) => item.name === name && item.type === 'component'
+    (item: Component) => item.name === name && (item.type === 'registry:component' || item.type === 'component')
   )
 }
 
 export async function generateStaticParams() {
   return registry.items
-    .filter((item: Component) => item.type === 'component' && item.name !== 'utils')
+    .filter((item: Component) => (item.type === 'registry:component' || item.type === 'component') && item.name !== 'utils')
     .map((item: Component) => ({
       name: item.name,
     }))

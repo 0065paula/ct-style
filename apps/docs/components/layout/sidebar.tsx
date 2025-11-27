@@ -8,11 +8,13 @@ import { cn } from '@/lib/utils'
 interface Component {
   name: string
   type: string
-  path: string
+  title?: string
+  description?: string
+  files?: Array<{ path: string; type: string }>
 }
 
 const components = registry.items.filter(
-  (item: Component) => item.type === 'component' && item.name !== 'utils'
+  (item: Component) => (item.type === 'registry:component' || item.type === 'component') && item.name !== 'utils'
 )
 
 const navigation = [
