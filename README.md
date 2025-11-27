@@ -106,12 +106,6 @@ npm run docs:build
 
 ### Registry URL
 
-**当前分支（registry-format）**：
-```
-https://raw.githubusercontent.com/0065paula/ct-style/registry-format
-```
-
-**主分支（main）**：
 ```
 https://raw.githubusercontent.com/0065paula/ct-style/main
 ```
@@ -132,7 +126,7 @@ https://raw.githubusercontent.com/0065paula/ct-style/main
      "style": "default",
      "rsc": true,
      "tsx": true,
-     "registry": "https://raw.githubusercontent.com/0065paula/ct-style/registry-format",
+     "registry": "https://raw.githubusercontent.com/0065paula/ct-style/main",
      "tailwind": {
        "config": "tailwind.config.ts",
        "css": "src/app/globals.css",
@@ -162,14 +156,14 @@ https://raw.githubusercontent.com/0065paula/ct-style/main
 1. **下载包装脚本**：
    ```bash
    mkdir -p scripts
-   curl https://raw.githubusercontent.com/0065paula/ct-style/registry-format/scripts/add-component.js -o scripts/add-component.js
+   curl https://raw.githubusercontent.com/0065paula/ct-style/main/scripts/add-component.js -o scripts/add-component.js
    chmod +x scripts/add-component.js
    ```
 
 2. **修改脚本中的 Registry URL**：
    编辑 `scripts/add-component.js`，设置：
    ```javascript
-   const REGISTRY_URL = 'https://raw.githubusercontent.com/0065paula/ct-style/registry-format';
+   const REGISTRY_URL = 'https://raw.githubusercontent.com/0065paula/ct-style/main';
    ```
 
 3. **添加 npm script**：
@@ -193,9 +187,9 @@ https://raw.githubusercontent.com/0065paula/ct-style/main
 1. **下载主题文件**：
    ```bash
    mkdir -p theme
-   curl https://raw.githubusercontent.com/0065paula/ct-style/registry-format/theme/tokens.css -o theme/tokens.css
-   curl https://raw.githubusercontent.com/0065paula/ct-style/registry-format/theme/preset.js -o theme/preset.js
-   curl https://raw.githubusercontent.com/0065paula/ct-style/registry-format/theme/globals.css -o theme/globals.css
+   curl https://raw.githubusercontent.com/0065paula/ct-style/main/theme/tokens.css -o theme/tokens.css
+   curl https://raw.githubusercontent.com/0065paula/ct-style/main/theme/preset.js -o theme/preset.js
+   curl https://raw.githubusercontent.com/0065paula/ct-style/main/theme/globals.css -o theme/globals.css
    ```
 
 2. **配置 Tailwind**：
@@ -308,15 +302,10 @@ https://raw.githubusercontent.com/0065paula/ct-style/main
 ## 📝 项目信息
 
 - **仓库地址**：`git@github.com:0065paula/ct-style.git`
-- **当前分支**：`registry-format`（官方格式）
-- **主分支**：`main`（传统格式）
-- **Registry URL**：`https://raw.githubusercontent.com/0065paula/ct-style/registry-format`
+- **主分支**：`main`（官方格式，符合最新规范）
+- **Registry URL**：`https://raw.githubusercontent.com/0065paula/ct-style/main`
 
 ## ⚠️ 注意事项
-
-1. **分支选择**：
-   - `registry-format` 分支：使用官方格式，符合最新规范
-   - `main` 分支：使用传统格式，兼容旧版 CLI
 
 2. **CLI 版本**：
    - 新版 CLI：支持 `components.json` 中的 `registry` 字段

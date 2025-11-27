@@ -1,17 +1,17 @@
 # 内部项目使用 Registry 指南
 
-本指南说明如何在内部项目中使用 `registry-format` 分支的 registry 进行界面开发。
+本指南说明如何在内部项目中使用 registry 进行界面开发。
 
 ## 📋 前置条件
 
-1. **Registry 分支已推送到远端**
-   - 当前分支：`registry-format`
+1. **Registry 已推送到远端**
+   - 主分支：`main`
    - 远端仓库：`git@github.com:0065paula/ct-style.git`
-   - 确保分支已推送：`git push origin registry-format`
+   - 确保分支已推送：`git push origin main`
 
 2. **Registry URL 格式**
-   - GitHub Raw URL: `https://raw.githubusercontent.com/0065paula/ct-style/registry-format`
-   - 或使用 GitLab（如果已迁移）：`http://gitlab.smartx.com/product-design/internal-tool-ui/-/raw/registry-format`
+   - GitHub Raw URL: `https://raw.githubusercontent.com/0065paula/ct-style/main`
+   - 或使用 GitLab（如果已迁移）：`http://gitlab.smartx.com/product-design/internal-tool-ui/-/raw/main`
 
 ## 🚀 使用步骤
 
@@ -41,7 +41,7 @@ npx shadcn@latest init
   "style": "default",
   "rsc": true,
   "tsx": true,
-  "registry": "https://raw.githubusercontent.com/0065paula/ct-style/registry-format",
+  "registry": "https://raw.githubusercontent.com/0065paula/ct-style/main",
   "tailwind": {
     "config": "tailwind.config.ts",
     "css": "src/app/globals.css",
@@ -64,7 +64,7 @@ npx shadcn@latest init
 如果 CLI 支持 `--registry` 参数：
 
 ```bash
-npx shadcn@latest add button --registry https://raw.githubusercontent.com/0065paula/ct-style/registry-format
+npx shadcn@latest add button --registry https://raw.githubusercontent.com/0065paula/ct-style/main
 ```
 
 #### 方式三：使用包装脚本（CLI 3.5.0）
@@ -74,7 +74,7 @@ npx shadcn@latest add button --registry https://raw.githubusercontent.com/0065pa
 1. **下载包装脚本**：
    ```bash
    mkdir -p scripts
-   curl https://raw.githubusercontent.com/0065paula/ct-style/registry-format/scripts/add-component.js -o scripts/add-component.js
+   curl https://raw.githubusercontent.com/0065paula/ct-style/main/scripts/add-component.js -o scripts/add-component.js
    chmod +x scripts/add-component.js
    ```
 
@@ -90,7 +90,7 @@ npx shadcn@latest add button --registry https://raw.githubusercontent.com/0065pa
 3. **修改脚本中的 Registry URL**：
    编辑 `scripts/add-component.js`，将 `REGISTRY_URL` 改为：
    ```javascript
-   const REGISTRY_URL = 'https://raw.githubusercontent.com/0065paula/ct-style/registry-format';
+   const REGISTRY_URL = 'https://raw.githubusercontent.com/0065paula/ct-style/main';
    ```
 
 ### 步骤 3：添加组件
@@ -128,9 +128,9 @@ npm run add:component button input card
    mkdir -p theme
    
    # 下载主题文件
-   curl https://raw.githubusercontent.com/0065paula/ct-style/registry-format/theme/tokens.css -o theme/tokens.css
-   curl https://raw.githubusercontent.com/0065paula/ct-style/registry-format/theme/preset.js -o theme/preset.js
-   curl https://raw.githubusercontent.com/0065paula/ct-style/registry-format/theme/globals.css -o theme/globals.css
+   curl https://raw.githubusercontent.com/0065paula/ct-style/main/theme/tokens.css -o theme/tokens.css
+   curl https://raw.githubusercontent.com/0065paula/ct-style/main/theme/preset.js -o theme/preset.js
+   curl https://raw.githubusercontent.com/0065paula/ct-style/main/theme/globals.css -o theme/globals.css
    ```
 
 2. **配置 Tailwind**：
@@ -161,13 +161,13 @@ https://raw.githubusercontent.com/{owner}/{repo}/{branch}
 
 **当前配置**：
 ```
-https://raw.githubusercontent.com/0065paula/ct-style/registry-format
+https://raw.githubusercontent.com/0065paula/ct-style/main
 ```
 
 ### 访问组件
 
-- Registry 主文件：`https://raw.githubusercontent.com/0065paula/ct-style/registry-format/registry.json`
-- 组件文件：`https://raw.githubusercontent.com/0065paula/ct-style/registry-format/registry/default/button/button.tsx`
+- Registry 主文件：`https://raw.githubusercontent.com/0065paula/ct-style/main/registry.json`
+- 组件文件：`https://raw.githubusercontent.com/0065paula/ct-style/main/registry/default/button/button.tsx`
 
 ## 🔧 使用 shadcn build（如果使用新版 CLI）
 
@@ -199,7 +199,7 @@ https://raw.githubusercontent.com/0065paula/ct-style/registry-format
 ### 1. 分支访问
 
 确保：
-- `registry-format` 分支已推送到远端
+- `main` 分支已推送到远端
 - 分支是公开的，或你有访问权限
 - URL 格式正确
 
@@ -234,7 +234,7 @@ npm run add:component button --overwrite
 
 - [shadcn/ui 官方文档](https://ui.shadcn.com)
 - [Registry 规范](https://ui.shadcn.com/docs/registry/getting-started)
-- Registry 仓库：`git@github.com:0065paula/ct-style.git` (registry-format 分支)
+- Registry 仓库：`git@github.com:0065paula/ct-style.git` (main 分支)
 
 ## 🆘 故障排查
 
@@ -263,7 +263,7 @@ npm run add:component button --overwrite
 
 ## 💡 最佳实践
 
-1. **固定分支或标签**：建议使用特定分支或标签，而不是 `main`
+1. **固定分支或标签**：建议使用特定分支或标签（当前使用 `main` 分支）
 2. **版本管理**：为 registry 创建版本标签，便于追踪
 3. **文档同步**：保持 registry 文档与组件同步
 4. **测试验证**：在安装组件后测试功能是否正常
