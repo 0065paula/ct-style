@@ -13,7 +13,8 @@
     "docs:build": "cd apps/docs && npm run build",
     "docs:start": "cd apps/docs && npm start",
     "serve": "node scripts/serve-registry.js",
-    "serve:registry": "node scripts/serve-registry.js 3002"
+    "serve:registry": "node scripts/serve-registry.js 3002",
+    "add:component": "node scripts/add-component.js"
   },
   "devDependencies": {
     "@mdx-js/loader": "^3.1.1",
