@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
 @layer base {
   :root {
@@ -65,6 +63,31 @@
     --select-item-bg-selected-focus: rgba(0, 136, 255, 0.2);
     --select-item-text-selected-focus: #005ED1;
     --select-item-icon: #0080FF;
+
+    /* Dropdown Menu Colors - CloudTower UI */
+    --dropdown-menu-bg: #FFFFFF;
+    --dropdown-menu-shadow: 0px 12px 40px 0px rgba(45, 58, 86, 0.3), 0px 0px 10px 0px rgba(107, 125, 153, 0.18);
+    --dropdown-menu-padding: 6px;
+    --dropdown-menu-border-radius: 8px;
+    --dropdown-menu-item-padding: 4px 8px;
+    --dropdown-menu-item-gap: 8px;
+    --dropdown-menu-item-border-radius: 4px;
+    --dropdown-menu-item-text: #00122E;
+    --dropdown-menu-item-bg-hover: rgba(192, 203, 224, 0.6);
+    --dropdown-menu-item-bg-focus: rgba(0, 136, 255, 0.16);
+    --dropdown-menu-item-text-focus: #1D326C;
+    --dropdown-menu-item-bg-selected: rgba(0, 136, 255, 0.1);
+    --dropdown-menu-item-text-selected: #0080FF;
+    --dropdown-menu-item-bg-selected-hover: rgba(0, 136, 255, 0.16);
+    --dropdown-menu-item-bg-selected-focus: rgba(0, 136, 255, 0.2);
+    --dropdown-menu-item-text-selected-focus: #005ED1;
+    --dropdown-menu-item-disabled-opacity: 0.5;
+    --dropdown-menu-label-text: rgba(44, 56, 82, 0.75);
+    --dropdown-menu-label-padding: 4px 8px;
+    --dropdown-menu-separator-color: rgba(211, 218, 235, 0.6);
+    --dropdown-menu-separator-height: 1px;
+    --dropdown-menu-section-gap: 3px;
+    --dropdown-menu-item-gap: 2px;
   }
 
   .dark {
@@ -92,10 +115,11 @@
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: hsl(var(--border));
   }
   body {
-    @apply bg-background text-foreground;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
   }
   html {
     scroll-behavior: smooth;
@@ -140,16 +164,31 @@
 
 /* Select placeholder color fix for Tailwind v3 */
 /* When SelectTrigger has data-placeholder, set inner span text color */
-[data-placeholder] > span {
+/* Only target SelectTrigger (has 'group' and 'w-full' classes) to avoid affecting other components like checkbox */
+/* Use higher specificity to override Tailwind classes */
+button.group.w-full[data-placeholder] > span.line-clamp-1,
+button.group.w-full[data-placeholder] > span[class*="line-clamp"],
+button.group[data-placeholder] > span.line-clamp-1,
+button.group[data-placeholder] > span[class*="line-clamp"] {
   color: var(--select-text-placeholder) !important;
 }
 
 /* When SelectTrigger doesn't have data-placeholder, set inner span text color to selected value color */
-button:not([data-placeholder]) > span {
-  color: var(--select-text);
+/* Only target SelectTrigger (has 'group' and 'w-full' classes) to avoid affecting other components like checkbox */
+/* Use higher specificity to override Tailwind classes */
+button.group.w-full:not([data-placeholder]) > span.line-clamp-1,
+button.group.w-full:not([data-placeholder]) > span[class*="line-clamp"],
+button.group:not([data-placeholder]) > span.line-clamp-1,
+button.group:not([data-placeholder]) > span[class*="line-clamp"] {
+  color: var(--select-text) !important;
 }
 
 /* Disabled state: text color should use CSS variable */
-button:disabled > span {
+/* Only target SelectTrigger (has 'group' and 'w-full' classes) to avoid affecting other components like checkbox */
+/* Use higher specificity to override Tailwind classes */
+button.group.w-full:disabled > span.line-clamp-1,
+button.group.w-full:disabled > span[class*="line-clamp"],
+button.group:disabled > span.line-clamp-1,
+button.group:disabled > span[class*="line-clamp"] {
   color: var(--select-text-disabled) !important;
 }

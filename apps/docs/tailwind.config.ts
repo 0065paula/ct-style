@@ -92,11 +92,32 @@ const config: Config = {
           'selected-focus': 'var(--select-item-bg-selected-focus)',
         },
         'select-item-icon': 'var(--select-item-icon)',
+        'dropdown-menu': {
+          bg: 'var(--dropdown-menu-bg)',
+          item: {
+            text: {
+              DEFAULT: 'var(--dropdown-menu-item-text)',
+              focus: 'var(--dropdown-menu-item-text-focus)',
+              selected: 'var(--dropdown-menu-item-text-selected)',
+              'selected-focus': 'var(--dropdown-menu-item-text-selected-focus)',
+            },
+            bg: {
+              hover: 'var(--dropdown-menu-item-bg-hover)',
+              focus: 'var(--dropdown-menu-item-bg-focus)',
+              selected: 'var(--dropdown-menu-item-bg-selected)',
+              'selected-hover': 'var(--dropdown-menu-item-bg-selected-hover)',
+              'selected-focus': 'var(--dropdown-menu-item-bg-selected-focus)',
+            },
+          },
+          label: 'var(--dropdown-menu-label-text)',
+          separator: 'var(--dropdown-menu-separator-color)',
+        },
       },
       boxShadow: {
         'select-hover': 'var(--select-shadow-hover)',
         'select-focus': 'var(--select-shadow-focus)',
         'select-content': 'var(--select-content-shadow)',
+        'dropdown-menu': 'var(--dropdown-menu-shadow)',
       },
       borderRadius: {
         lg: 'var(--radius)',

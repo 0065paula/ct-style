@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { Copy, ArrowLeft, Archive, Flag, Clock, MoreHorizontal, Mail, Calendar, List, Tag, Trash2, ChevronRight, ArrowUp, ArrowDown, Settings } from 'lucide-react'
+import { Copy, ArrowLeft, Archive, Flag, Clock, MoreHorizontal, Mail, Calendar, List, Tag, Trash2, ChevronRight, ArrowUp, ArrowDown, Settings, User, CreditCard, Users, FileText } from 'lucide-react'
 import dynamic from 'next/dynamic'
 import registry from '../../../../../registry.json'
 import { Sidebar as LayoutSidebar } from '../../../components/layout/sidebar'
@@ -19,6 +19,10 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  DropdownMenuGroup,
+  DropdownMenuSub,
+  DropdownMenuSubTrigger,
+  DropdownMenuSubContent,
 } from '@/components/ui/dropdown-menu'
 import { Combobox } from '@/components/ui/combobox'
 import {
@@ -1349,12 +1353,42 @@ export default function ComponentPage({ params }: { params: { name: string } }) 
                         <Button variant="basic">Open Menu</Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent>
-                        <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>Profile</DropdownMenuItem>
-                        <DropdownMenuItem>Billing</DropdownMenuItem>
-                        <DropdownMenuItem>Team</DropdownMenuItem>
-                        <DropdownMenuItem>Subscription</DropdownMenuItem>
+                        <DropdownMenuGroup>
+                          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                          <DropdownMenuItem>Profile</DropdownMenuItem>
+                          <DropdownMenuItem>Billing</DropdownMenuItem>
+                          <DropdownMenuItem>Team</DropdownMenuItem>
+                          <DropdownMenuItem>Subscription</DropdownMenuItem>
+                        </DropdownMenuGroup>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">With Icons</h3>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="basic">Open Menu</Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent>
+                        <DropdownMenuGroup>
+                          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                          <DropdownMenuItem>
+                            <User className="mr-2 h-4 w-4" />
+                            <span>Profile</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem>
+                            <CreditCard className="mr-2 h-4 w-4" />
+                            <span>Billing</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem>
+                            <Users className="mr-2 h-4 w-4" />
+                            <span>Team</span>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem>
+                            <FileText className="mr-2 h-4 w-4" />
+                            <span>Subscription</span>
+                          </DropdownMenuItem>
+                        </DropdownMenuGroup>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </div>
@@ -1365,13 +1399,64 @@ export default function ComponentPage({ params }: { params: { name: string } }) 
                         <Button variant="basic">Open Menu</Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent>
-                        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                        <DropdownMenuGroup>
+                          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                          <DropdownMenuItem>Profile</DropdownMenuItem>
+                          <DropdownMenuItem>Billing</DropdownMenuItem>
+                        </DropdownMenuGroup>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>Profile</DropdownMenuItem>
-                        <DropdownMenuItem>Billing</DropdownMenuItem>
+                        <DropdownMenuGroup>
+                          <DropdownMenuLabel>Settings</DropdownMenuLabel>
+                          <DropdownMenuItem>Team</DropdownMenuItem>
+                          <DropdownMenuItem>Subscription</DropdownMenuItem>
+                        </DropdownMenuGroup>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">With Nested Menu</h3>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="basic">Open Menu</Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent>
+                        <DropdownMenuItem>
+                          <Mail className="mr-2 h-4 w-4" />
+                          <span>Mark as Read</span>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                          <Archive className="mr-2 h-4 w-4" />
+                          <span>Archive</span>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                          <Clock className="mr-2 h-4 w-4" />
+                          <span>Snooze</span>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                          <Calendar className="mr-2 h-4 w-4" />
+                          <span>Add to Calendar</span>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                          <List className="mr-2 h-4 w-4" />
+                          <span>Add to List</span>
+                        </DropdownMenuItem>
+                        <DropdownMenuSub>
+                          <DropdownMenuSubTrigger>
+                            <Tag className="mr-2 h-4 w-4" />
+                            <span>Label As...</span>
+                          </DropdownMenuSubTrigger>
+                          <DropdownMenuSubContent>
+                            <DropdownMenuItem>Important</DropdownMenuItem>
+                            <DropdownMenuItem>Work</DropdownMenuItem>
+                            <DropdownMenuItem>Personal</DropdownMenuItem>
+                            <DropdownMenuItem>Travel</DropdownMenuItem>
+                          </DropdownMenuSubContent>
+                        </DropdownMenuSub>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>Team</DropdownMenuItem>
-                        <DropdownMenuItem>Subscription</DropdownMenuItem>
+                        <DropdownMenuItem className="text-destructive">
+                          <Trash2 className="mr-2 h-4 w-4" />
+                          <span>Trash</span>
+                        </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </div>
@@ -2073,16 +2158,58 @@ export default function ComponentPage({ params }: { params: { name: string } }) 
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
+  DropdownMenuGroup,
+  DropdownMenuSub,
+  DropdownMenuSubTrigger,
+  DropdownMenuSubContent,
 } from "@/components/ui/dropdown-menu"
+import { Mail, Archive, Clock, Calendar, List, Tag, Trash2 } from "lucide-react"
 
 <DropdownMenu>
   <DropdownMenuTrigger asChild>
-    <Button variant="basic">Open</Button>
+    <Button variant="basic">Open Menu</Button>
   </DropdownMenuTrigger>
   <DropdownMenuContent>
-    <DropdownMenuItem>Item 1</DropdownMenuItem>
-    <DropdownMenuItem>Item 2</DropdownMenuItem>
+    <DropdownMenuItem>
+      <Mail className="mr-2 h-4 w-4" />
+      <span>Mark as Read</span>
+    </DropdownMenuItem>
+    <DropdownMenuItem>
+      <Archive className="mr-2 h-4 w-4" />
+      <span>Archive</span>
+    </DropdownMenuItem>
+    <DropdownMenuItem>
+      <Clock className="mr-2 h-4 w-4" />
+      <span>Snooze</span>
+    </DropdownMenuItem>
+    <DropdownMenuItem>
+      <Calendar className="mr-2 h-4 w-4" />
+      <span>Add to Calendar</span>
+    </DropdownMenuItem>
+    <DropdownMenuItem>
+      <List className="mr-2 h-4 w-4" />
+      <span>Add to List</span>
+    </DropdownMenuItem>
+    <DropdownMenuSub>
+      <DropdownMenuSubTrigger>
+        <Tag className="mr-2 h-4 w-4" />
+        <span>Label As...</span>
+      </DropdownMenuSubTrigger>
+      <DropdownMenuSubContent>
+        <DropdownMenuItem>Important</DropdownMenuItem>
+        <DropdownMenuItem>Work</DropdownMenuItem>
+        <DropdownMenuItem>Personal</DropdownMenuItem>
+        <DropdownMenuItem>Travel</DropdownMenuItem>
+      </DropdownMenuSubContent>
+    </DropdownMenuSub>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem className="text-destructive">
+      <Trash2 className="mr-2 h-4 w-4" />
+      <span>Trash</span>
+    </DropdownMenuItem>
   </DropdownMenuContent>
 </DropdownMenu>`
                   } else if (component.name === 'combobox') {
@@ -2311,6 +2438,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  DropdownMenuGroup,
 } from "@/components/ui/dropdown-menu"
 import { DataTable } from "@/components/ui/data-table"
 
@@ -2350,8 +2478,10 @@ const columns: ColumnDef<Payment>[] = [
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          <DropdownMenuItem>View details</DropdownMenuItem>
+          <DropdownMenuGroup>
+            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuItem>View details</DropdownMenuItem>
+          </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
     ),
