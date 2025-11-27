@@ -57,6 +57,46 @@ const config: Config = {
           border: 'var(--sidebar-border)',
           ring: 'var(--sidebar-ring)',
         },
+        'select-border': {
+          default: 'var(--select-border-default)',
+          hover: 'var(--select-border-hover)',
+          focus: 'var(--select-border-focus)',
+          disabled: 'var(--select-border-disabled)',
+        },
+        'select-bg': {
+          default: 'var(--select-bg-default)',
+          disabled: 'var(--select-bg-disabled)',
+        },
+        'select-text': {
+          DEFAULT: 'var(--select-text)',
+          placeholder: 'var(--select-text-placeholder)',
+          disabled: 'var(--select-text-disabled)',
+        },
+        'select-icon': {
+          DEFAULT: 'var(--select-icon)',
+          hover: 'var(--select-icon-hover)',
+          disabled: 'var(--select-icon-disabled)',
+        },
+        'select-label': 'var(--select-label-text)',
+        'select-item-text': {
+          DEFAULT: 'var(--select-item-text)',
+          focus: 'var(--select-item-text-focus)',
+          selected: 'var(--select-item-text-selected)',
+          'selected-focus': 'var(--select-item-text-selected-focus)',
+        },
+        'select-item-bg': {
+          hover: 'var(--select-item-bg-hover)',
+          focus: 'var(--select-item-bg-focus)',
+          selected: 'var(--select-item-bg-selected)',
+          'selected-hover': 'var(--select-item-bg-selected-hover)',
+          'selected-focus': 'var(--select-item-bg-selected-focus)',
+        },
+        'select-item-icon': 'var(--select-item-icon)',
+      },
+      boxShadow: {
+        'select-hover': 'var(--select-shadow-hover)',
+        'select-focus': 'var(--select-shadow-focus)',
+        'select-content': 'var(--select-content-shadow)',
       },
       borderRadius: {
         lg: 'var(--radius)',

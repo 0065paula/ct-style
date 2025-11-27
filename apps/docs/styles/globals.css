@@ -37,6 +37,34 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
     --radius: 0.5rem;
+
+    /* Select Colors - CloudTower UI */
+    --select-border-default: rgba(172, 186, 211, 0.6);
+    --select-border-hover: rgba(107, 128, 167, 0.6);
+    --select-border-focus: #0080FF;
+    --select-border-disabled: rgba(172, 186, 211, 0.6);
+    --select-bg-default: #FFFFFF;
+    --select-bg-disabled: rgba(211, 218, 235, 0.6);
+    --select-text: #00122E;
+    --select-text-placeholder: rgba(0, 21, 64, 0.30);
+    --select-text-disabled: rgba(0, 21, 64, 0.3);
+    --select-icon: rgba(44, 56, 82, 0.6);
+    --select-icon-hover: #0080FF;
+    --select-icon-disabled: rgba(44, 56, 82, 0.6);
+    --select-shadow-hover: 0px 0px 0px 4px rgba(225, 230, 241, 0.6);
+    --select-shadow-focus: 0px 0px 0px 4px rgba(0, 136, 255, 0.16);
+    --select-content-shadow: 0px 12px 40px 0px rgba(45, 58, 86, 0.3), 0px 0px 10px 0px rgba(107, 125, 153, 0.18);
+    --select-label-text: rgba(44, 56, 82, 0.75);
+    --select-item-text: #00122E;
+    --select-item-bg-hover: rgba(192, 203, 224, 0.6);
+    --select-item-bg-focus: rgba(0, 136, 255, 0.16);
+    --select-item-text-focus: #1D326C;
+    --select-item-bg-selected: rgba(0, 136, 255, 0.1);
+    --select-item-text-selected: #0080FF;
+    --select-item-bg-selected-hover: rgba(0, 136, 255, 0.16);
+    --select-item-bg-selected-focus: rgba(0, 136, 255, 0.2);
+    --select-item-text-selected-focus: #005ED1;
+    --select-item-icon: #0080FF;
   }
 
   .dark {
@@ -108,4 +136,20 @@
 
 .animate-accordion-up {
   animation: accordion-up 0.2s ease-out;
+}
+
+/* Select placeholder color fix for Tailwind v3 */
+/* When SelectTrigger has data-placeholder, set inner span text color */
+[data-placeholder] > span {
+  color: var(--select-text-placeholder) !important;
+}
+
+/* When SelectTrigger doesn't have data-placeholder, set inner span text color to selected value color */
+button:not([data-placeholder]) > span {
+  color: var(--select-text);
+}
+
+/* Disabled state: text color should use CSS variable */
+button:disabled > span {
+  color: var(--select-text-disabled) !important;
 }
