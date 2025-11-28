@@ -177,33 +177,27 @@
   animation: accordion-up 0.2s ease-out;
 }
 
-/* Select placeholder color fix for Tailwind v3 */
-/* When SelectTrigger has data-placeholder, set inner span text color */
-/* Only target SelectTrigger (has 'group' and 'w-full' classes) to avoid affecting other components like checkbox */
-/* Use higher specificity to override Tailwind classes */
-button.group.w-full[data-placeholder] > span.line-clamp-1,
-button.group.w-full[data-placeholder] > span[class*="line-clamp"],
+/* Select and Combobox placeholder color fix */
+/* When SelectTrigger/ComboboxTrigger has data-placeholder, set inner span text color */
+/* Only target SelectTrigger/ComboboxTrigger (has 'group' class) to avoid affecting other components like checkbox */
+/* Higher specificity selector to override Tailwind classes without !important */
 button.group[data-placeholder] > span.line-clamp-1,
 button.group[data-placeholder] > span[class*="line-clamp"] {
-  color: var(--select-text-placeholder) !important;
+  color: var(--select-text-placeholder);
 }
 
-/* When SelectTrigger doesn't have data-placeholder, set inner span text color to selected value color */
-/* Only target SelectTrigger (has 'group' and 'w-full' classes) to avoid affecting other components like checkbox */
-/* Use higher specificity to override Tailwind classes */
-button.group.w-full:not([data-placeholder]) > span.line-clamp-1,
-button.group.w-full:not([data-placeholder]) > span[class*="line-clamp"],
+/* When SelectTrigger/ComboboxTrigger doesn't have data-placeholder, set inner span text color to selected value color */
+/* Only target SelectTrigger/ComboboxTrigger (has 'group' class) to avoid affecting other components like checkbox */
+/* Higher specificity selector to override Tailwind classes without !important */
 button.group:not([data-placeholder]) > span.line-clamp-1,
 button.group:not([data-placeholder]) > span[class*="line-clamp"] {
-  color: var(--select-text) !important;
+  color: var(--select-text);
 }
 
 /* Disabled state: text color should use CSS variable */
-/* Only target SelectTrigger (has 'group' and 'w-full' classes) to avoid affecting other components like checkbox */
-/* Use higher specificity to override Tailwind classes */
-button.group.w-full:disabled > span.line-clamp-1,
-button.group.w-full:disabled > span[class*="line-clamp"],
+/* Only target SelectTrigger/ComboboxTrigger (has 'group' class) to avoid affecting other components like checkbox */
+/* Higher specificity selector to override Tailwind classes without !important */
 button.group:disabled > span.line-clamp-1,
 button.group:disabled > span[class*="line-clamp"] {
-  color: var(--select-text-disabled) !important;
+  color: var(--select-text-disabled);
 }
