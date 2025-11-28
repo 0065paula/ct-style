@@ -120,6 +120,7 @@
     --menu-item-bg-selected-hover: rgba(0, 136, 255, 0.16);
     --menu-item-bg-selected-focus: rgba(0, 136, 255, 0.2);
     --menu-item-text-selected-focus: #005ED1;
+    --menu-item-icon: #0080FF;
     --menu-item-disabled-opacity: 0.5;
     --menu-label-text: rgba(44, 56, 82, 0.75);
     --menu-separator-color: rgba(211, 218, 235, 0.6);

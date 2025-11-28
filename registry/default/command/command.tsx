@@ -73,7 +73,7 @@ const CommandGroup = React.forwardRef<
   <CommandPrimitive.Group
     ref={ref}
     className={cn(
-      "overflow-hidden p-1 text-[var(--foreground)] [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-[var(--muted-foreground)]",
+      "overflow-hidden p-1.5 space-y-0.5 text-[var(--foreground)] [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-[var(--menu-label-text)]",
       className
     )}
     {...props}
@@ -101,7 +101,13 @@ const CommandItem = React.forwardRef<
   <CommandPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-[var(--accent)] aria-selected:text-[var(--accent-foreground)] data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50",
+      "relative flex cursor-default select-none items-center gap-2 rounded py-1 px-2 text-sm leading-[1.5714285714285714em] text-[var(--menu-item-text)] outline-none transition-colors my-0.5",
+      "data-[highlighted]:bg-[var(--menu-item-bg-hover)]",
+      "focus:bg-[var(--menu-item-bg-focus)] focus:text-[var(--menu-item-text-focus)]",
+      "aria-selected:bg-[var(--menu-item-bg-selected)] aria-selected:text-[var(--menu-item-text-selected)]",
+      "aria-selected:data-[highlighted]:bg-[var(--menu-item-bg-selected-hover)] aria-selected:data-[highlighted]:text-[var(--menu-item-text-selected)]",
+      "aria-selected:focus:bg-[var(--menu-item-bg-selected-focus)] aria-selected:focus:text-[var(--menu-item-text-selected-focus)]",
+      "data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50",
       className
     )}
     {...props}

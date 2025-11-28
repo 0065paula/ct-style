@@ -74,6 +74,7 @@ export function Combobox({
                   value={option.label}
                   keywords={[option.value, option.label]}
                   disabled={option.disabled}
+                  aria-selected={value === option.value}
                   onSelect={() => {
                     if (!option.disabled) {
                       onValueChange?.(option.value === value ? "" : option.value)
@@ -81,13 +82,15 @@ export function Combobox({
                     }
                   }}
                 >
-                  <Check
-                    className={cn(
-                      "mr-2 h-4 w-4",
-                      value === option.value ? "opacity-100" : "opacity-0"
-                    )}
-                  />
                   {option.label}
+                  <span className="absolute right-2 flex h-4 w-4 items-center justify-center">
+                    <Check
+                      className={cn(
+                        "h-4 w-4 text-[var(--menu-item-icon)]",
+                        value === option.value ? "opacity-100" : "opacity-0"
+                      )}
+                    />
+                  </span>
                 </CommandItem>
               ))}
             </CommandGroup>
