@@ -32,6 +32,7 @@ import {
   ContextMenuLabel,
   ContextMenuSeparator,
   ContextMenuTrigger,
+  ContextMenuGroup,
 } from '@/components/ui/context-menu'
 import { ButtonGroup } from '@/components/ui/button-group'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -135,6 +136,16 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet'
 import { SheetDemo, SheetSidesDemo } from '@/components/sheet-demo'
+import {
+  Command,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+  CommandShortcut,
+  CommandSeparator,
+} from '@/components/ui/command'
 
 const TableOfContents = dynamic(() => import('../../../components/layout/toc').then(mod => ({ default: mod.TableOfContents })), {
   ssr: false,
@@ -1470,7 +1481,7 @@ export default function ComponentPage({ params }: { params: { name: string } }) 
                       options={[
                         { value: 'react', label: 'React' },
                         { value: 'vue', label: 'Vue' },
-                        { value: 'angular', label: 'Angular' },
+                        { value: 'angular', label: 'Angular', disabled: true },
                         { value: 'svelte', label: 'Svelte' },
                       ]}
                       placeholder="Select framework..."
@@ -1511,13 +1522,16 @@ export default function ComponentPage({ params }: { params: { name: string } }) 
                         Right click here
                       </ContextMenuTrigger>
                       <ContextMenuContent>
-                        <ContextMenuLabel>My Account</ContextMenuLabel>
+                        <ContextMenuGroup>
+                          <ContextMenuLabel>My Account</ContextMenuLabel>
+                          <ContextMenuItem>Profile</ContextMenuItem>
+                          <ContextMenuItem>Billing</ContextMenuItem>
+                          <ContextMenuItem>Team</ContextMenuItem>
+                        </ContextMenuGroup>
                         <ContextMenuSeparator />
-                        <ContextMenuItem>Profile</ContextMenuItem>
-                        <ContextMenuItem>Billing</ContextMenuItem>
-                        <ContextMenuItem>Team</ContextMenuItem>
-                        <ContextMenuSeparator />
-                        <ContextMenuItem>Subscription</ContextMenuItem>
+                        <ContextMenuGroup>
+                          <ContextMenuItem>Subscription</ContextMenuItem>
+                        </ContextMenuGroup>
                       </ContextMenuContent>
                     </ContextMenu>
                   </div>
@@ -1711,6 +1725,70 @@ export default function ComponentPage({ params }: { params: { name: string } }) 
                         </div>
                       </PopoverContent>
                     </Popover>
+                  </div>
+                </div>
+              )}
+              {component.name === 'command' && (
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">Basic</h3>
+                    <Command className="rounded-lg border shadow-md max-w-[450px]">
+                      <CommandInput placeholder="Type a command or search..." />
+                      <CommandList>
+                        <CommandEmpty>No results found.</CommandEmpty>
+                        <CommandGroup heading="Suggestions">
+                          <CommandItem>
+                            <Calendar className="mr-2 h-4 w-4" />
+                            <span>Calendar</span>
+                          </CommandItem>
+                          <CommandItem>
+                            <User className="mr-2 h-4 w-4" />
+                            <span>Profile</span>
+                          </CommandItem>
+                          <CommandItem>
+                            <CreditCard className="mr-2 h-4 w-4" />
+                            <span>Billing</span>
+                          </CommandItem>
+                        </CommandGroup>
+                        <CommandSeparator />
+                        <CommandGroup heading="Settings">
+                          <CommandItem>
+                            <Users className="mr-2 h-4 w-4" />
+                            <span>Team</span>
+                          </CommandItem>
+                          <CommandItem>
+                            <Settings className="mr-2 h-4 w-4" />
+                            <span>Settings</span>
+                          </CommandItem>
+                        </CommandGroup>
+                      </CommandList>
+                    </Command>
+                  </div>
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium">With Shortcuts</h3>
+                    <Command className="rounded-lg border shadow-md max-w-[450px]">
+                      <CommandInput placeholder="Type a command or search..." />
+                      <CommandList>
+                        <CommandEmpty>No results found.</CommandEmpty>
+                        <CommandGroup heading="Suggestions">
+                          <CommandItem>
+                            <Calendar className="mr-2 h-4 w-4" />
+                            <span>Calendar</span>
+                            <CommandShortcut>⌘C</CommandShortcut>
+                          </CommandItem>
+                          <CommandItem>
+                            <User className="mr-2 h-4 w-4" />
+                            <span>Profile</span>
+                            <CommandShortcut>⌘P</CommandShortcut>
+                          </CommandItem>
+                          <CommandItem>
+                            <CreditCard className="mr-2 h-4 w-4" />
+                            <span>Billing</span>
+                            <CommandShortcut>⌘B</CommandShortcut>
+                          </CommandItem>
+                        </CommandGroup>
+                      </CommandList>
+                    </Command>
                   </div>
                 </div>
               )}
@@ -2315,6 +2393,50 @@ import { Button } from "@/components/ui/button"
     </div>
   </PopoverContent>
 </Popover>`
+                  } else if (component.name === 'command') {
+                    return `import {
+  Command,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+  CommandShortcut,
+  CommandSeparator,
+} from "@/components/ui/command"
+import { Calendar, User, CreditCard, Settings, Users } from "lucide-react"
+
+<Command className="rounded-lg border shadow-md">
+  <CommandInput placeholder="Type a command or search..." />
+  <CommandList>
+    <CommandEmpty>No results found.</CommandEmpty>
+    <CommandGroup heading="Suggestions">
+      <CommandItem>
+        <Calendar className="mr-2 h-4 w-4" />
+        <span>Calendar</span>
+      </CommandItem>
+      <CommandItem>
+        <User className="mr-2 h-4 w-4" />
+        <span>Profile</span>
+      </CommandItem>
+      <CommandItem>
+        <CreditCard className="mr-2 h-4 w-4" />
+        <span>Billing</span>
+      </CommandItem>
+    </CommandGroup>
+    <CommandSeparator />
+    <CommandGroup heading="Settings">
+      <CommandItem>
+        <Users className="mr-2 h-4 w-4" />
+        <span>Team</span>
+      </CommandItem>
+      <CommandItem>
+        <Settings className="mr-2 h-4 w-4" />
+        <span>Settings</span>
+      </CommandItem>
+    </CommandGroup>
+  </CommandList>
+</Command>`
                   } else if (component.name === 'breadcrumb') {
                     return `import {
   Breadcrumb,

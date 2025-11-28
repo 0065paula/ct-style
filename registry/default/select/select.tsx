@@ -164,7 +164,7 @@ const SelectItem = React.forwardRef<
       "data-[checked]:bg-[var(--select-item-bg-selected)] data-[checked]:text-[var(--select-item-text-selected)] data-[checked]:gap-[5px]",
       "data-[checked]:hover:bg-[var(--select-item-bg-selected-hover)] data-[checked]:hover:text-[var(--select-item-text-selected)]",
       "data-[checked]:focus:bg-[var(--select-item-bg-selected-focus)] data-[checked]:focus:text-[var(--select-item-text-selected-focus)]",
-      "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      "data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50",
       className
     )}
     {...props}

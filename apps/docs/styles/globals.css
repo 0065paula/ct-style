@@ -15,6 +15,10 @@
 
 @layer base {
   :root {
+    /* Brand Colors - CloudTower UI Primary */
+    --brand: #0080FF;
+    --brand-foreground: #FFFFFF;
+    
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
@@ -27,10 +31,10 @@
     --secondary-foreground: 222.2 47.4% 11.2%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --accent: #F1F5F9;
+    --accent-foreground: #1A1F35;
+    --destructive: #F0483E;
+    --destructive-foreground: #F8FAFC;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
@@ -64,30 +68,40 @@
     --select-item-text-selected-focus: #005ED1;
     --select-item-icon: #0080FF;
 
-    /* Dropdown Menu Colors - CloudTower UI */
-    --dropdown-menu-bg: #FFFFFF;
-    --dropdown-menu-shadow: 0px 12px 40px 0px rgba(45, 58, 86, 0.3), 0px 0px 10px 0px rgba(107, 125, 153, 0.18);
-    --dropdown-menu-padding: 6px;
-    --dropdown-menu-border-radius: 8px;
-    --dropdown-menu-item-padding: 4px 8px;
-    --dropdown-menu-item-gap: 8px;
-    --dropdown-menu-item-border-radius: 4px;
-    --dropdown-menu-item-text: #00122E;
-    --dropdown-menu-item-bg-hover: rgba(192, 203, 224, 0.6);
-    --dropdown-menu-item-bg-focus: rgba(0, 136, 255, 0.16);
-    --dropdown-menu-item-text-focus: #1D326C;
-    --dropdown-menu-item-bg-selected: rgba(0, 136, 255, 0.1);
-    --dropdown-menu-item-text-selected: #0080FF;
-    --dropdown-menu-item-bg-selected-hover: rgba(0, 136, 255, 0.16);
-    --dropdown-menu-item-bg-selected-focus: rgba(0, 136, 255, 0.2);
-    --dropdown-menu-item-text-selected-focus: #005ED1;
-    --dropdown-menu-item-disabled-opacity: 0.5;
-    --dropdown-menu-label-text: rgba(44, 56, 82, 0.75);
-    --dropdown-menu-label-padding: 4px 8px;
-    --dropdown-menu-separator-color: rgba(211, 218, 235, 0.6);
-    --dropdown-menu-separator-height: 1px;
-    --dropdown-menu-section-gap: 3px;
-    --dropdown-menu-item-gap: 2px;
+    /* Popup/Overlay Colors - CloudTower UI (for popover, tooltip, dialog, sheet, command, etc.) */
+    --popup-bg: #FFFFFF;
+    --popup-shadow: 0px 12px 40px 0px rgba(45, 58, 86, 0.3), 0px 0px 10px 0px rgba(107, 125, 153, 0.18);
+    --popup-text: #00122E;
+
+    /* Menu Colors - CloudTower UI (for dropdown-menu, context-menu, etc.) */
+    --menu-item-text: #00122E;
+    --menu-item-bg-hover: rgba(0, 136, 255, 0.16);
+    --menu-item-bg-focus: rgba(0, 136, 255, 0.16);
+    --menu-item-text-focus: #1D326C;
+    --menu-item-bg-selected: rgba(0, 136, 255, 0.1);
+    --menu-item-text-selected: #0080FF;
+    --menu-item-bg-selected-hover: rgba(0, 136, 255, 0.16);
+    --menu-item-bg-selected-focus: rgba(0, 136, 255, 0.2);
+    --menu-item-text-selected-focus: #005ED1;
+    --menu-item-disabled-opacity: 0.5;
+    --menu-label-text: rgba(44, 56, 82, 0.75);
+    --menu-separator-color: rgba(211, 218, 235, 0.6);
+
+    /* Dropdown Menu Colors - CloudTower UI (deprecated, use --popup-* and --menu-* instead) */
+    --dropdown-menu-bg: var(--popup-bg);
+    --dropdown-menu-shadow: var(--popup-shadow);
+    --dropdown-menu-item-text: var(--menu-item-text);
+    --dropdown-menu-item-bg-hover: var(--menu-item-bg-hover);
+    --dropdown-menu-item-bg-focus: var(--menu-item-bg-focus);
+    --dropdown-menu-item-text-focus: var(--menu-item-text-focus);
+    --dropdown-menu-item-bg-selected: var(--menu-item-bg-selected);
+    --dropdown-menu-item-text-selected: var(--menu-item-text-selected);
+    --dropdown-menu-item-bg-selected-hover: var(--menu-item-bg-selected-hover);
+    --dropdown-menu-item-bg-selected-focus: var(--menu-item-bg-selected-focus);
+    --dropdown-menu-item-text-selected-focus: var(--menu-item-text-selected-focus);
+    --dropdown-menu-item-disabled-opacity: var(--menu-item-disabled-opacity);
+    --dropdown-menu-label-text: var(--menu-label-text);
+    --dropdown-menu-separator-color: var(--menu-separator-color);
   }
 
   .dark {
@@ -103,10 +117,10 @@
     --secondary-foreground: 210 40% 98%;
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --accent: #1E293B;
+    --accent-foreground: #F8FAFC;
+    --destructive: #991B1B;
+    --destructive-foreground: #F8FAFC;
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;

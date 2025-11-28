@@ -8,7 +8,17 @@ const ContextMenu = ContextMenuPrimitive.Root
 
 const ContextMenuTrigger = ContextMenuPrimitive.Trigger
 
-const ContextMenuGroup = ContextMenuPrimitive.Group
+const ContextMenuGroup = React.forwardRef<
+  React.ElementRef<typeof ContextMenuPrimitive.Group>,
+  React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Group>
+>(({ className, ...props }, ref) => (
+  <ContextMenuPrimitive.Group
+    ref={ref}
+    className={cn("p-1.5 space-y-0.5", className)}
+    {...props}
+  />
+))
+ContextMenuGroup.displayName = ContextMenuPrimitive.Group.displayName
 
 const ContextMenuPortal = ContextMenuPrimitive.Portal
 
@@ -25,7 +35,10 @@ const ContextMenuSubTrigger = React.forwardRef<
   <ContextMenuPrimitive.SubTrigger
     ref={ref}
     className={cn(
-      "flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[state=open]:bg-accent",
+      "flex cursor-default select-none items-center gap-2 rounded py-1 px-2 text-sm leading-[1.5714285714285714em] text-[var(--menu-item-text)] outline-none transition-colors",
+      "data-[highlighted]:bg-[var(--menu-item-bg-hover)]",
+      "focus:bg-[var(--menu-item-bg-focus)] focus:text-[var(--menu-item-text-focus)]",
+      "data-[state=open]:bg-[var(--menu-item-bg-focus)] data-[state=open]:text-[var(--menu-item-text-focus)]",
       inset && "pl-8",
       className
     )}
@@ -44,7 +57,7 @@ const ContextMenuSubContent = React.forwardRef<
   <ContextMenuPrimitive.SubContent
     ref={ref}
     className={cn(
-      "z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+      "z-50 min-w-[8rem] overflow-hidden rounded-lg bg-[var(--popup-bg)] p-1.5 shadow-[var(--popup-shadow)] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
       className
     )}
     {...props}
@@ -55,12 +68,13 @@ ContextMenuSubContent.displayName = ContextMenuPrimitive.SubContent.displayName
 const ContextMenuContent = React.forwardRef<
   React.ElementRef<typeof ContextMenuPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Content>
->(({ className, ...props }, ref) => (
+>(({ className, sideOffset = 4, ...props }, ref) => (
   <ContextMenuPrimitive.Portal>
     <ContextMenuPrimitive.Content
       ref={ref}
+      sideOffset={sideOffset}
       className={cn(
-        "z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+        "z-50 min-w-[8rem] overflow-hidden rounded-lg bg-[var(--popup-bg)] p-1.5 shadow-[var(--popup-shadow)] data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
         className
       )}
       {...props}
@@ -78,7 +92,13 @@ const ContextMenuItem = React.forwardRef<
   <ContextMenuPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      "relative flex cursor-default select-none items-center gap-2 rounded py-1 px-2 text-sm leading-[1.5714285714285714em] text-[var(--menu-item-text)] outline-none transition-colors my-0.5",
+      "data-[highlighted]:bg-[var(--menu-item-bg-hover)]",
+      "focus:bg-[var(--menu-item-bg-focus)] focus:text-[var(--menu-item-text-focus)]",
+      "data-[checked]:bg-[var(--menu-item-bg-selected)] data-[checked]:text-[var(--menu-item-text-selected)]",
+      "data-[checked]:hover:bg-[var(--menu-item-bg-selected-hover)] data-[checked]:hover:text-[var(--menu-item-text-selected)]",
+      "data-[checked]:focus:bg-[var(--menu-item-bg-selected-focus)] data-[checked]:focus:text-[var(--menu-item-text-selected-focus)]",
+      "data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50",
       inset && "pl-8",
       className
     )}
@@ -94,7 +114,13 @@ const ContextMenuCheckboxItem = React.forwardRef<
   <ContextMenuPrimitive.CheckboxItem
     ref={ref}
     className={cn(
-      "relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      "relative flex cursor-default select-none items-center gap-2 rounded py-1 pl-8 pr-2 text-sm leading-[1.5714285714285714em] text-[var(--menu-item-text)] outline-none transition-colors",
+      "data-[highlighted]:bg-[var(--menu-item-bg-hover)]",
+      "focus:bg-[var(--menu-item-bg-focus)] focus:text-[var(--menu-item-text-focus)]",
+      "data-[checked]:bg-[var(--menu-item-bg-selected)] data-[checked]:text-[var(--menu-item-text-selected)]",
+      "data-[checked]:hover:bg-[var(--menu-item-bg-selected-hover)] data-[checked]:hover:text-[var(--menu-item-text-selected)]",
+      "data-[checked]:focus:bg-[var(--menu-item-bg-selected-focus)] data-[checked]:focus:text-[var(--menu-item-text-selected-focus)]",
+      "data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50",
       className
     )}
     checked={checked}
@@ -118,7 +144,13 @@ const ContextMenuRadioItem = React.forwardRef<
   <ContextMenuPrimitive.RadioItem
     ref={ref}
     className={cn(
-      "relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      "relative flex cursor-default select-none items-center gap-2 rounded py-1 pl-8 pr-2 text-sm leading-[1.5714285714285714em] text-[var(--menu-item-text)] outline-none transition-colors",
+      "data-[highlighted]:bg-[var(--menu-item-bg-hover)]",
+      "focus:bg-[var(--menu-item-bg-focus)] focus:text-[var(--menu-item-text-focus)]",
+      "data-[checked]:bg-[var(--menu-item-bg-selected)] data-[checked]:text-[var(--menu-item-text-selected)]",
+      "data-[checked]:hover:bg-[var(--menu-item-bg-selected-hover)] data-[checked]:hover:text-[var(--menu-item-text-selected)]",
+      "data-[checked]:focus:bg-[var(--menu-item-bg-selected-focus)] data-[checked]:focus:text-[var(--menu-item-text-selected-focus)]",
+      "data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50",
       className
     )}
     {...props}
@@ -142,7 +174,7 @@ const ContextMenuLabel = React.forwardRef<
   <ContextMenuPrimitive.Label
     ref={ref}
     className={cn(
-      "px-2 py-1.5 text-sm font-semibold text-foreground",
+      "px-2 py-1 text-xs leading-[1.5em] text-[var(--menu-label-text)] no-underline",
       inset && "pl-8",
       className
     )}
@@ -157,7 +189,7 @@ const ContextMenuSeparator = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <ContextMenuPrimitive.Separator
     ref={ref}
-    className={cn("-mx-1 my-1 h-px bg-muted", className)}
+    className={cn("h-px bg-[var(--menu-separator-color)] my-1.5", className)}
     {...props}
   />
 ))

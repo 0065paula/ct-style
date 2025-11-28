@@ -22,6 +22,7 @@ import {
 export interface ComboboxOption {
   value: string
   label: string
+  disabled?: boolean
 }
 
 export interface ComboboxProps {
@@ -72,10 +73,14 @@ export function Combobox({
               {options.map((option) => (
                 <CommandItem
                   key={option.value}
-                  value={option.value}
-                  onSelect={(currentValue) => {
-                    onValueChange?.(currentValue === value ? "" : currentValue)
-                    setOpen(false)
+                  value={option.label}
+                  keywords={[option.value, option.label]}
+                  disabled={option.disabled}
+                  onSelect={() => {
+                    if (!option.disabled) {
+                      onValueChange?.(option.value === value ? "" : option.value)
+                      setOpen(false)
+                    }
                   }}
                 >
                   <Check
